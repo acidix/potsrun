@@ -7,7 +7,11 @@ import Partners from "../components/Football/Partners";
 import BlogPost from "../components/Football/BlogPost";
 import Footer from "../components/Layouts/Footer";
 import { sanityFetch } from "../sanity/lib/client";
-import { blogQuery, nextClubEventQuery, nextEventsQuery } from "../sanity/lib/queries";
+import {
+  blogQuery,
+  nextClubEventQuery,
+  nextEventsQuery,
+} from "../sanity/lib/queries";
 
 interface Props {
   nextClubEvent: any;
@@ -15,7 +19,7 @@ interface Props {
   blogPosts: any;
 }
 
-async function fetchData():Promise<Props> {
+async function fetchData(): Promise<Props> {
   const nextClubEvent = await sanityFetch({
     query: nextClubEventQuery,
   });
@@ -47,11 +51,11 @@ export default async function Home() {
 
       <UpcomingMatches events={data.nextEvents} />
 
+      <BlogPost posts={data.blogPosts} />
+
       <Products />
 
       <Partners />
-
-      <BlogPost posts={data.blogPosts}/>
 
       <Footer />
     </>

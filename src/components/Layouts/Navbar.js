@@ -71,7 +71,6 @@ const Navbar = () => {
         className="navbar navbar-expand-lg navbar-light bg-light"
       >
         <div className="container-fluid">
-
           <button
             onClick={toggleNavbar}
             className={classTwo}
@@ -84,6 +83,18 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
+          <Link href="/" className="navbar-brand">
+            <Image
+                  className="menu-image"
+                  src="/images/potsrun_menu.png"
+                  alt="image"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  width={100}
+                  height={50}
+                />
+          </Link>
 
           <div className={classOne} id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">

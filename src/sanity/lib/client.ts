@@ -2,6 +2,7 @@ import {createClient, type QueryParams} from 'next-sanity'
 import { apiVersion, dataset, projectId } from '../env'
 import imageUrlBuilder from '@sanity/image-url'
 
+
 export const client = createClient({
   projectId,
   dataset,
@@ -36,7 +37,7 @@ export function urlFor(source) {
 
 export function blocksToText(blocks, preview_length) {
   const resp = blocks
-    .map(block => block.children.map(child => child.text).join(''))
+    .map(block => block.children?.map(child => child.text).join(''))
 
   if (preview_length) {
     return resp.join('').substring(0, preview_length)

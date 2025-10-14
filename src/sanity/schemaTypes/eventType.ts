@@ -20,6 +20,11 @@ export const eventType = defineType({
       title: 'Distance (km)',
       type: 'number',
     }),
+    defineField({
+      name: 'participants',
+      title: 'PotsRun Participants',
+      type: 'number',
+    }),
   ],
   orderings: [
     {
@@ -35,6 +40,20 @@ export const eventType = defineType({
       by: [
         {field: 'date', direction: 'asc'}
       ]
+    },
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      date: 'date',
+      distance: 'distance',
+      participants: 'participants',
+    },
+    prepare(select) {
+      return {
+        title: select.title,
+        subtitle: `${select.date} - ${select.distance} km - ${select.participants} Participants`,
+      }
     }
-  ]
+  }
 })

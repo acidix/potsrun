@@ -16,7 +16,7 @@ const CommentsArea = () => {
               <footer className="comment-meta">
                 <div className="comment-author vcard">
                   <Image
-                    src="/images/football/footb-user1.jpg"
+                    src="/images/potsrun/footb-user1.jpg"
                     className="avatar"
                     alt="image"
                     width={300}
@@ -52,7 +52,7 @@ const CommentsArea = () => {
                   <footer className="comment-meta">
                     <div className="comment-author vcard">
                       <Image
-                        src="/images/football/footb-user2.jpg"
+                        src="/images/potsrun/footb-user2.jpg"
                         className="avatar"
                         alt="image"
                         width={300}
@@ -88,7 +88,7 @@ const CommentsArea = () => {
                       <footer className="comment-meta">
                         <div className="comment-author vcard">
                           <Image
-                            src="/images/football/footb-user3.jpg"
+                            src="/images/potsrun/footb-user3.jpg"
                             className="avatar"
                             alt="image"
                             width={300}
@@ -129,7 +129,7 @@ const CommentsArea = () => {
               <footer className="comment-meta">
                 <div className="comment-author vcard">
                   <Image
-                    src="/images/football/footb-user4.jpg"
+                    src="/images/potsrun/footb-user4.jpg"
                     className="avatar"
                     alt="image"
                     width={300}
@@ -165,7 +165,7 @@ const CommentsArea = () => {
                   <footer className="comment-meta">
                     <div className="comment-author vcard">
                       <Image
-                        src="/images/football/footb-user1.jpg"
+                        src="/images/potsrun/footb-user1.jpg"
                         className="avatar"
                         alt="image"
                         width={300}

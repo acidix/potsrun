@@ -180,9 +180,8 @@ Navbar Area CSS
   width: 100%;
   z-index: 999;
   box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.9);
-  background-color: #000000 !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
   animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
-  border-bottom: 1px solid #101010;
   padding-top: 22px;
   padding-bottom: 22px;
 }
@@ -192,6 +191,12 @@ Navbar Area CSS
 }
 .navbar.is-sticky .others-option {
   display: none;
+}
+.navbar.is-sticky .navbar-brand {
+  visibility: visible;
+}
+.navbar .navbar-brand {
+  visibility: hidden;
 }
 
 .navbar-light .navbar-brand {
@@ -266,15 +271,18 @@ Navbar Area CSS
     padding-left: 15px;
     padding-right: 15px;
   }
+  .navbar .menu-image {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .navbar.is-sticky {
     pad-top: 12px;
     pad-bottom: 12px;
   }
   .navbar-light .navbar-toggler {
-    color: #000000;
     border: none;
     padding: 2px 5px;
-    background: #fff;
+    background: #000000;
   }
   .navbar-light .navbar-toggler .burger-menu {
     cursor: pointer;
@@ -349,10 +357,41 @@ Main Banner Area CSS
   top: 0;
   width: 100%;
   height: 100%;
-  display: none;
+  display: block;
   z-index: -1;
   background-color: #000000;
   opacity: 0.6;
+  pointer-events: none;
+}
+
+.banner-video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.banner-overlay img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .main-banner-content {
@@ -465,6 +504,30 @@ Next Match Area CSS
 .next-match-content .content {
   margin-left: 0;
   max-width: 100%;
+}
+.next-match-content .content .read-more-btn {
+  display: inline-block;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  width: auto !important;
+  margin-top: 30px;
+  padding-right: 88px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.next-match-content .content .read-more-btn::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 80px;
+  height: 1px;
+  background-color: #808080;
+  z-index: -1;
+}
+.next-match-content .content .read-more-btn:hover {
+  padding-right: 50px;
 }
 .next-match-content .content h2 {
   text-transform: uppercase;
@@ -603,9 +666,10 @@ Upcoming Matches Area CSS
 }
 
 .upcoming-matches-slides {
-  max-width: 790px;
-  margin-left: auto;
-  margin-right: 0;
+  margin: 0;
+}
+.upcoming-matches-slides .swiper-button-disabled {
+  display: none;
 }
 .upcoming-matches-slides .swiper-button-prev, .upcoming-matches-slides .swiper-button-next {
   color: #ffffff;
@@ -789,8 +853,6 @@ Partners Area CSS
 }
 .single-partners-box a {
   display: block;
-  background-color: #000000;
-  border-radius: 0 50px 0 0;
   padding: 20px;
 }
 .single-partners-box a img {
@@ -1215,7 +1277,7 @@ Blog Details Area CSS
   font-weight: 500;
   font-size: 18px;
   padding-right: 20px;
-  padding-left: 45px;
+  padding-left: 0px;
 }
 .blog-details-header .entry-meta ul li i {
   font-size: 32px;

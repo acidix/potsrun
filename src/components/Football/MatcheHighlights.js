@@ -29,10 +29,10 @@ const MatcheHighlights = () => {
           className="matches-highlights-slides"
         >
           <SwiperSlide>
-            <div 
+            <div
               className="single-matches-highlights-item"
               style={{
-                backgroundImage: `url(/images/football/matches-highlights/highlight1.jpg)`,
+                backgroundImage: `url(/images/potsrun/matches-highlights/highlight1.jpg)`,
               }}
             >
               <div className="container">
@@ -61,10 +61,10 @@ const MatcheHighlights = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div 
+            <div
               className="single-matches-highlights-item"
               style={{
-                backgroundImage: `url(/images/football/matches-highlights/highlight2.jpg)`,
+                backgroundImage: `url(/images/potsrun/matches-highlights/highlight2.jpg)`,
               }}
             >
               <div className="container">
@@ -93,10 +93,10 @@ const MatcheHighlights = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div 
+            <div
               className="single-matches-highlights-item"
               style={{
-                backgroundImage: `url(/images/football/matches-highlights/highlight3.jpg)`,
+                backgroundImage: `url(/images/potsrun/matches-highlights/highlight3.jpg)`,
               }}
             >
               <div className="container">
@@ -125,10 +125,10 @@ const MatcheHighlights = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div 
+            <div
               className="single-matches-highlights-item"
               style={{
-                backgroundImage: `url(/images/football/matches-highlights/highlight4.jpg)`,
+                backgroundImage: `url(/images/potsrun/matches-highlights/highlight4.jpg)`,
               }}
             >
               <div className="container">

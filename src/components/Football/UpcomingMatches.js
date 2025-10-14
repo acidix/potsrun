@@ -19,6 +19,7 @@ const UpcomingMatches = (props) => {
             </div>
             <h3>{event.title}</h3>
             <span className="sub-title">{event.distance} km</span>
+            <span className="sub-title">{event.participants} {event.participants > 1 ? 'PotsRunners' : 'PotsRunner'}</span>
           </div>
         </SwiperSlide>
       )
@@ -46,10 +47,10 @@ const UpcomingMatches = (props) => {
             }}
             breakpoints={{
               0: {
-                slidesPerView: 1,
+                slidesPerView: 2,
               },
               768: {
-                slidesPerView: 2,
+                slidesPerView: 3,
               },
             }}
             modules={[Autoplay, Navigation]}
@@ -62,12 +63,6 @@ const UpcomingMatches = (props) => {
         </div>
 
         <div className="upcoming-matches-shape1">
-          <Image
-            src="/images/football/footb-player1.png"
-            alt="image"
-            width={735}
-            height={663}
-          />
         </div>
       </section>
     </>

@@ -11,55 +11,63 @@ const BlogPost = (props) => {
 
   const components = {
     types: {
-      code: props => (
+      code: (props) => (
         <pre data-language={props.node.language}>
           <code>{props.node.code}</code>
         </pre>
-      )
-    }
-  }
+      ),
+    },
+  };
 
-  if ('posts' in props && props.posts.length > 0) {
+  if ("posts" in props && props.posts.length > 0) {
     props.posts.forEach(function (post, i) {
       postsList.push(
         <div className="col-lg-4 col-md-6" key={i}>
-        <div className="single-blog-post">
-          <div className="post-image">
-            <Image
-              src={post.image ? urlFor(post.image).width(750).height(500).url() : ""}
-              alt="image"
-              width={750}
-              height={500}
-            />
-            <Link
-              href={post.slug ? "/" + post.slug : "/"}
-              target="_blank"
-              className="link-btn"
-            ></Link>
-          </div>
+          <div className="single-blog-post">
+            <div className="post-image">
+              <Image
+                src={
+                  post.image
+                    ? urlFor(post.image).width(750).height(500).url()
+                    : ""
+                }
+                alt="image"
+                width={750}
+                height={500}
+              />
+              <Link
+                href={post.slug ? "/blog/" + post.slug : "/"}
+                className="link-btn"
+              ></Link>
+            </div>
 
-          <div className="post-content">
-            <ul className="post-meta">
-              <li>{post.publishedAt ? (moment(new Date(post.publishedAt))).format('DD.MM.YYYY') : "unknown"}</li>
-            </ul>
+            <div className="post-content">
+              <ul className="post-meta">
+                <li>
+                  {post.publishedAt
+                    ? moment(new Date(post.publishedAt)).format("DD.MM.YYYY")
+                    : "unknown"}
+                </li>
+              </ul>
 
-            <h3>
-              <Link href={post.slug ? "/" + post.slug : "/"} target="_blank">
-                {post.title}
+              <h3>
+                <Link href={post.slug ? "/blog/" + post.slug : "/"}>
+                  {post.title}
+                </Link>
+              </h3>
+
+              <p>{blocksToText(post.body, 300)} ...</p>
+
+              <Link
+                href={post.slug ? "/blog/" + post.slug : "/"}
+                className="read-more-btn"
+              >
+                Read More
               </Link>
-            </h3>
-
-            <p>
-            {blocksToText(post.body,300)} ...
-            </p>
-
-            <Link href={post.slug ? "/" + post.slug : "/"} className="read-more-btn">
-              Read More
-            </Link>
+            </div>
           </div>
-        </div>
-      </div>
-)
+        </div>,
+      );
     });
   }
 
@@ -70,18 +78,15 @@ const BlogPost = (props) => {
           <div className="section-title">
             <h2>Neuigkeiten</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-              ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-              accumsan lacus vel facilisis.
+              Hier findest du alle aktuellen Neuigkeiten rund um PotsRun! Von
+              Lauftipps und Trainingsberichten über Veranstaltungsankündigungen
+              bis hin zu Erfahrungsberichten unserer Läufer – bleib immer auf
+              dem Laufenden und lass dich von unserer Laufgemeinschaft
+              inspirieren.
             </p>
           </div>
 
-          <div className="row justify-content-center">
-
-            {postsList}
-
-          </div>
+          <div className="row justify-content-center">{postsList}</div>
         </div>
       </section>
     </>

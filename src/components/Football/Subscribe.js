@@ -45,7 +45,7 @@ const Subscribe = () => {
 
             <div className="subscribe-shape1">
               <Image
-                src="/images/football/football1.png"
+                src="/images/potsrun/football1.png"
                 alt="image"
                 width={253}
                 height={206}
@@ -53,7 +53,7 @@ const Subscribe = () => {
             </div>
             <div className="subscribe-shape2">
               <Image
-                src="/images/football/football2.png"
+                src="/images/potsrun/football2.png"
                 alt="image"
                 width={386}
                 height={314}

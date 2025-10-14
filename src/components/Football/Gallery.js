@@ -42,7 +42,7 @@ const Gallery = () => {
             <SwiperSlide>
               <div className="single-gallery-item">
                 <Image
-                  src="/images/football/gallery/footb-gallery1.jpg"
+                  src="/images/potsrun/gallery/footb-gallery1.jpg"
                   alt="image"
                   width={750}
                   height={1000}
@@ -53,7 +53,7 @@ const Gallery = () => {
             <SwiperSlide>
               <div className="single-gallery-item">
                 <Image
-                  src="/images/football/gallery/footb-gallery2.jpg"
+                  src="/images/potsrun/gallery/footb-gallery2.jpg"
                   alt="image"
                   width={750}
                   height={1000}
@@ -64,7 +64,7 @@ const Gallery = () => {
             <SwiperSlide>
               <div className="single-gallery-item">
                 <Image
-                  src="/images/football/gallery/footb-gallery3.jpg"
+                  src="/images/potsrun/gallery/footb-gallery3.jpg"
                   alt="image"
                   width={750}
                   height={1000}
@@ -75,7 +75,7 @@ const Gallery = () => {
             <SwiperSlide>
               <div className="single-gallery-item">
                 <Image
-                  src="/images/football/gallery/footb-gallery4.jpg"
+                  src="/images/potsrun/gallery/footb-gallery4.jpg"
                   alt="image"
                   width={750}
                   height={1000}
@@ -87,7 +87,7 @@ const Gallery = () => {
 
         <div className="gallery-shape1">
           <Image
-            src="/images/football/footb-player2.png"
+            src="/images/potsrun/footb-player2.png"
             alt="image"
             width={600}
             height={623}

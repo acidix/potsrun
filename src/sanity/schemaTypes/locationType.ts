@@ -25,6 +25,10 @@ export const locationType = defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: 'location',
+      type: 'geopoint',
+    })
   ],
   preview: {
     select: {

@@ -3,8 +3,10 @@ import {defineQuery} from 'next-sanity'
 export const nextClubEventQuery = defineQuery(
     `*[_type == "clubEvent" && date > now()] | order(date asc) [0] {
  "place": place->name,
- date,
- 'image': place->image.asset,
+  date,
+  'image': place->image.asset,
+  'lng': place->location.lng,
+  'lat': place->location.lat,
 }`
   );
 
@@ -12,7 +14,8 @@ export const nextEventsQuery = defineQuery(
     `*[_type == "event" && date > now()] | order(date asc) [0..4] {
  title,
  date,
- distance
+ distance,
+ participants
 }`
   );
 
