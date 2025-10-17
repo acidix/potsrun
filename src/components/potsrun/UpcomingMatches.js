@@ -5,24 +5,28 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
+import Link from "next/link";
 
 const UpcomingMatches = (props) => {
   let eventsList = [];
 
-  if ('events' in props && props.events.length > 0) {
+  if ("events" in props && props.events.length > 0) {
     props.events.forEach(function (event, i) {
       eventsList.push(
         <SwiperSlide key={i}>
           <div className="single-upcoming-matches-item">
             <div className="date">
-              <span>{(moment(new Date(event.date))).format('DD.MM.YYYY')}</span>
+              <span>{moment(new Date(event.date)).format("DD.MM.YYYY")}</span>
             </div>
             <h3>{event.title}</h3>
             <span className="sub-title">{event.distance} km</span>
-            <span className="sub-title">{event.participants} {event.participants > 1 ? 'PotsRunners' : 'PotsRunner'}</span>
+            <span className="sub-title">
+              {event.participants}{" "}
+              {event.participants > 1 ? "PotsRunners" : "PotsRunner"}
+            </span>
           </div>
-        </SwiperSlide>
-      )
+        </SwiperSlide>,
+      );
     });
   }
 
@@ -33,7 +37,9 @@ const UpcomingMatches = (props) => {
           <div className="section-title">
             <h2>Kommende Wettkämpfe</h2>
             <p>
-              Wir starten bei vielen regionalen und überregionalen Events als Potsrun Team. Hier findest du eine Übersicht über die nächsten Wettkämpfe.
+              Wir starten bei vielen regionalen und überregionalen Events als
+              Potsrun Team. Hier findest du eine Übersicht über die nächsten
+              Wettkämpfe.
             </p>
           </div>
 
@@ -56,14 +62,17 @@ const UpcomingMatches = (props) => {
             modules={[Autoplay, Navigation]}
             className="upcoming-matches-slides"
           >
-
             {eventsList}
-
           </Swiper>
+
+          <div className="text-center mt-4">
+            <Link href="/events" className="read-more-btn">
+              Alle Wettkämpfe anzeigen
+            </Link>
+          </div>
         </div>
 
-        <div className="upcoming-matches-shape1">
-        </div>
+        <div className="upcoming-matches-shape1"></div>
       </section>
     </>
   );
