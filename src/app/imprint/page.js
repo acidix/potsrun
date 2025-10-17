@@ -25,39 +25,25 @@ export default async function Page() {
 
                 <h2>Angaben gemäß § 5 TMG</h2>
                 <p>
-                  <strong>[Ihr Name]</strong>
+                  <strong>Mirko Seiffert</strong>
                   <br />
-                  [Ihre Straße und Hausnummer]
+                  Zeppelinstraße 57
                   <br />
-                  [PLZ, Stadt]
+                  14471 Potsdam
                   <br />
                   Deutschland
                 </p>
 
                 <h2>Kontakt</h2>
                 <p>
-                  Telefon: [Ihre Telefonnummer] (optional)
-                  <br />
                   E-Mail:{" "}
-                  <a href="mailto:[Ihre E-Mail-Adresse]">
-                    [Ihre E-Mail-Adresse]
-                  </a>
+                  <a href="mailto:kontakt@potsrun.de">kontakt@potsrun.de</a>
                 </p>
-
-                <h2>Umsatzsteuer-ID</h2>
-                <p>
-                  Umsatzsteuer-Identifikationsnummer gemäß § 27a
-                  Umsatzsteuergesetz:
-                  <br />
-                  [Falls vorhanden, hier Ihre USt-ID einfügen, ansonsten
-                  Abschnitt entfernen]
-                </p>
-
                 <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
                 <p>
-                  [Ihr Name]
+                  Mirko Seiffert
                   <br />
-                  [Ihre Anschrift (wie oben)]
+                  Zeppelinstraße 57, 14471 Potsdam
                 </p>
 
                 <h2>EU-Streitschlichtung</h2>
@@ -134,7 +120,7 @@ export default async function Page() {
                 </p>
 
                 <p>
-                  <strong>Stand:</strong> [Datum der letzten Aktualisierung]
+                  <strong>Stand:</strong> 17.10.2025
                 </p>
               </div>
             </div>
