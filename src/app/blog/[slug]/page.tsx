@@ -1,5 +1,5 @@
 import React from "react";
-import SingleBlogContent from "../../../components/Football/SingleBlog/SingleBlogContent";
+import SingleBlogContent from "../../../components/potsrun/SingleBlog/SingleBlogContent";
 import { client } from "../../../sanity/lib/client";
 
 async function fetchData(params: { slug: string }): Promise<any> {
@@ -18,8 +18,7 @@ async function fetchData(params: { slug: string }): Promise<any> {
   return post[0] || {};
 }
 
-
-export default async function Page({params}: {params: {slug: string}}) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchData({ slug: params.slug });
   return (
     <>
@@ -39,7 +38,6 @@ async function getStaticPaths() {
         slug: post.slug,
       },
     })) || [];
-
 
   return {
     paths,

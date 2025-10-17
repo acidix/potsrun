@@ -1,10 +1,10 @@
 import Navbar from "../components/Layouts/Navbar";
-import Banner from "../components/Football/Banner";
-import NextMatch from "../components/Football/NextMatch";
-import UpcomingMatches from "../components/Football/UpcomingMatches";
-import Products from "../components/Football/Products";
-import Partners from "../components/Football/Partners";
-import BlogPost from "../components/Football/BlogPost";
+import Banner from "../components/potsrun/Banner";
+import NextMatch from "../components/potsrun/NextMatch";
+import UpcomingMatches from "../components/potsrun/UpcomingMatches";
+import Products from "../components/potsrun/Products";
+import Partners from "../components/potsrun/Partners";
+import BlogPost from "../components/potsrun/BlogPost";
 import Footer from "../components/Layouts/Footer";
 import { sanityFetch } from "../sanity/lib/client";
 import {
