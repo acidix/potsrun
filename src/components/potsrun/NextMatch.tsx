@@ -7,70 +7,19 @@ import { urlFor } from "../../sanity/lib/client";
 import Link from "next/link";
 
 export default function NextMatch(Props) {
-  let [nextEvent, setNextEvent] = React.useState(Props.nextEvent);
-  const [days, setDays] = React.useState("");
-  const [hours, setHours] = React.useState("");
-  const [minutes, setMinutes] = React.useState("");
-  const [seconds, setSeconds] = React.useState("");
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      commingSoonTime();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const commingSoonTime = () => {
-    let endTime = new Date(nextEvent?.date || undefined);
-    let endTimeParse = Date.parse(endTime.toString()) / 1000;
-    let now = new Date();
-    let nowParse = Date.parse(now.toString()) / 1000;
-    let timeLeft = endTimeParse - nowParse;
-    let days = Math.floor(timeLeft / 86400);
-    let hours = Number(Math.floor((timeLeft - days * 86400) / 3600));
-    let minutes = Number(
-      Math.floor((timeLeft - days * 86400 - hours * 3600) / 60),
-    );
-    let seconds = Number(
-      Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60),
-    );
-    let hourstring,
-      minutestring,
-      secondstring = "";
-    if (hours < 10) {
-      hourstring = "0" + hours;
-    } else {
-      hourstring = String(hours);
+  const nextEvent = React.useMemo(() => {
+    if (Props.nextEvent) {
+      return Props.nextEvent;
     }
-    if (minutes < 10) {
-      minutestring = "0" + minutes;
-    } else {
-      minutestring = String(minutes);
-    }
-    if (seconds < 10) {
-      secondstring = "0" + seconds;
-    } else {
-      secondstring = String(seconds);
-    }
-    setDays(String(days));
-    setHours(hourstring);
-    setMinutes(minutestring);
-    setSeconds(secondstring);
-  };
 
-  if (nextEvent == null) {
     const today = new Date();
     const nextThursday = new Date(today);
     nextThursday.setDate(today.getDate() + ((4 - today.getDay() + 7) % 7));
     nextThursday.setHours(19, 0, 0, 0);
 
-    // get the week number in the year of nextThursday
     const weekNumber = moment(nextThursday).isoWeek();
-    let location = "";
-    if (weekNumber % 4 === 0) {
-      nextEvent = {
-        date: nextThursday.toISOString(),
+    const fallbackLocations = [
+      {
         place: "Bio Company (Humboldtbrücke)",
         image: {
           _type: "image",
@@ -81,10 +30,8 @@ export default function NextMatch(Props) {
         },
         lng: 13.070731,
         lat: 52.40277,
-      };
-    } else if (weekNumber % 4 === 1) {
-      nextEvent = {
-        date: nextThursday.toISOString(),
+      },
+      {
         place: "Babelsberg (Weberplatz)",
         image: {
           _type: "image",
@@ -95,10 +42,8 @@ export default function NextMatch(Props) {
         },
         lng: 13.095297,
         lat: 52.394214,
-      };
-    } else if (weekNumber % 4 === 2) {
-      nextEvent = {
-        date: nextThursday.toISOString(),
+      },
+      {
         place: "Meilenweit (Laufladen)",
         image: {
           _type: "image",
@@ -109,10 +54,8 @@ export default function NextMatch(Props) {
         },
         lng: 13.052276,
         lat: 52.401491,
-      };
-    } else if (weekNumber % 4 === 3) {
-      nextEvent = {
-        date: nextThursday.toISOString(),
+      },
+      {
         place: "Dampfmaschinenhaus",
         image: {
           _type: "image",
@@ -123,9 +66,82 @@ export default function NextMatch(Props) {
         },
         lng: 13.123456,
         lat: 52.423456,
-      };
+      },
+    ];
+
+    const fallback =
+      fallbackLocations[weekNumber % fallbackLocations.length] ?? null;
+
+    if (!fallback) {
+      return null;
     }
-  }
+
+    return {
+      date: nextThursday.toISOString(),
+      ...fallback,
+    };
+  }, [Props.nextEvent]);
+
+  const [days, setDays] = React.useState("");
+  const [hours, setHours] = React.useState("");
+  const [minutes, setMinutes] = React.useState("");
+  const [seconds, setSeconds] = React.useState("");
+
+  const commingSoonTime = React.useCallback(() => {
+    if (!nextEvent?.date) {
+      setDays("0");
+      setHours("00");
+      setMinutes("00");
+      setSeconds("00");
+      return;
+    }
+
+    const endTime = new Date(nextEvent.date);
+    const endTimeParse = Date.parse(endTime.toString()) / 1000;
+    const now = new Date();
+    const nowParse = Date.parse(now.toString()) / 1000;
+    const timeLeft = endTimeParse - nowParse;
+
+    const calculatedDays = Math.max(0, Math.floor(timeLeft / 86400));
+    const calculatedHours = Math.max(
+      0,
+      Math.floor((timeLeft - calculatedDays * 86400) / 3600),
+    );
+    const calculatedMinutes = Math.max(
+      0,
+      Math.floor(
+        (timeLeft - calculatedDays * 86400 - calculatedHours * 3600) / 60,
+      ),
+    );
+    const calculatedSeconds = Math.max(
+      0,
+      Math.floor(
+        timeLeft -
+          calculatedDays * 86400 -
+          calculatedHours * 3600 -
+          calculatedMinutes * 60,
+      ),
+    );
+
+    const hourstring = calculatedHours.toString().padStart(2, "0");
+    const minutestring = calculatedMinutes.toString().padStart(2, "0");
+    const secondstring = calculatedSeconds.toString().padStart(2, "0");
+
+    setDays(String(calculatedDays));
+    setHours(hourstring);
+    setMinutes(minutestring);
+    setSeconds(secondstring);
+  }, [nextEvent]);
+
+  React.useEffect(() => {
+    commingSoonTime();
+    const interval = setInterval(() => {
+      commingSoonTime();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [commingSoonTime]);
+
   if (nextEvent !== null && nextEvent !== undefined) {
     return (
       <>

@@ -1,26 +1,24 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const Banner = () => {
   return (
     <>
       <div id="home" className="main-banner">
-        <video
-          className="banner-video"
-          autoPlay
-          playsInline
-          muted
-          loop
-        >
+        <video className="banner-video" autoPlay playsInline muted loop>
           <source src="/videos/hero.webm" type="video/webm" />
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
 
         <div className="banner-overlay">
-          <img
+          <Image
             src="/images/potsrun-hero-logo.png"
             alt="PotsRun hero overlay"
+            width={1200}
+            height={344}
+            priority
           />
         </div>
 
