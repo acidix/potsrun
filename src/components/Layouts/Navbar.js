@@ -13,7 +13,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    let elementId = document.getElementById("navbar");
+    const elementId = document.getElementById("navbar");
+    if (!elementId) {
+      return;
+    }
     const handleScroll = () => {
       if (window.scrollY > 170) {
         elementId.classList.add("is-sticky");
@@ -35,8 +38,16 @@ const Navbar = () => {
       let mainNavLinks = document.querySelectorAll(".navbar-nav li a");
       let fromTop = window.scrollY;
       mainNavLinks.forEach((link) => {
+        if (!(link instanceof HTMLAnchorElement)) {
+          return;
+        }
         if (link.hash) {
           let section = document.querySelector(link.hash);
+
+          if (!(section instanceof HTMLElement)) {
+            link.classList.remove("active");
+            return;
+          }
 
           if (
             section.offsetTop <= fromTop &&
@@ -86,14 +97,14 @@ const Navbar = () => {
 
           <Link href="/" className="navbar-brand">
             <Image
-                  className="menu-image"
-                  src="/images/potsrun_menu.png"
-                  alt="image"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                  width={100}
-                  height={50}
-                />
+              className="menu-image"
+              src="/images/potsrun_menu.png"
+              alt="image"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              width={100}
+              height={50}
+            />
           </Link>
 
           <div className={classOne} id="navbarSupportedContent">

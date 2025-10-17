@@ -126,7 +126,7 @@ export default function NextMatch(Props) {
       };
     }
   }
-  if (nextEvent !== null || nextEvent !== undefined) {
+  if (nextEvent !== null && nextEvent !== undefined) {
     return (
       <>
         <section className="next-match-area">
@@ -190,8 +190,9 @@ export default function NextMatch(Props) {
 
                       <Link
                         className="read-more-btn"
-                        href={`http://www.google.com/maps/place/${nextEvent?.lat || 0},${nextEvent?.lng || 0}`}
+                        href={`https://www.google.com/maps/place/${nextEvent?.lat || 0},${nextEvent?.lng || 0}`}
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
                         Zum Treffpunkt
                       </Link>
@@ -237,4 +238,6 @@ export default function NextMatch(Props) {
       </>
     );
   }
+
+  return null;
 }

@@ -26,6 +26,7 @@ const ArticleFooter = () => {
                 href="https://www.facebook.com/"
                 className="facebook"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="bx bxl-facebook"></i>
               </a>
@@ -35,6 +36,7 @@ const ArticleFooter = () => {
                 href="https://www.twitter.com/"
                 className="twitter"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="bx bxl-twitter"></i>
               </a>
@@ -44,6 +46,7 @@ const ArticleFooter = () => {
                 href="https://www.linkedin.com/"
                 className="linkedin"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="bx bxl-linkedin"></i>
               </a>
@@ -53,6 +56,7 @@ const ArticleFooter = () => {
                 href="https://www.instagram.com/"
                 className="instagram"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="bx bxl-instagram"></i>
               </a>
