@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Datenschutzerklärung - PotsRun",
+  description: "Informationen zum Datenschutz bei PotsRun.",
+};
+
 export default async function Page() {
   return (
     <>
@@ -26,7 +31,7 @@ export default async function Page() {
                 <p>
                   <strong>Verantwortlicher gemäß Art. 4 Abs. 7 DSGVO:</strong>
                   <br />
-                  Mirko Seiffert
+                  Mirko Seifert
                   <br />
                   Zeppelinstraße 57
                   <br />

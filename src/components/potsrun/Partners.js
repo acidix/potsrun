@@ -11,15 +11,13 @@ const Partners = () => {
           <div className="section-title">
             <h2>Unsere Partner</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-              ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-              accumsan lacus vel facilisis.
+              Starke Partner für jeden Kilometer – danke für die Unterstützung
+              auf und abseits der Strecke!
             </p>
           </div>
 
-          <div className="row justify-content-center">
-            <div className="col-lg-6 col-sm-8 col-md-8 col-12">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-lg-4 col-sm-6 col-md-6 col-8">
               <div className="single-partners-box">
                 <Link
                   href="https://www.meilenweit-potsdam.de/"
@@ -29,7 +27,7 @@ const Partners = () => {
                   <Image
                     src="/images/potsrun/partner/meilenweit.png"
                     alt="image"
-                    width={380}
+                    width={280}
                     height={60}
                     style={{
                       margin: "0 auto",
@@ -116,6 +114,23 @@ const Partners = () => {
                 >
                   <Image
                     src="/images/potsrun/partner/schloesserlauf.png"
+                    alt="image"
+                    width={185}
+                    height={60}
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-sm-4 col-md-4 col-6">
+              <div className="single-partners-box">
+                <Link
+                  href="https://aufdruck-potsdam.de/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/potsrun/partner/aufdruck-potsdam.png"
                     alt="image"
                     width={185}
                     height={60}

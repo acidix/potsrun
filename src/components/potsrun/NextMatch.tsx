@@ -3,13 +3,30 @@
 import React from "react";
 import Image from "next/image";
 import moment from "moment";
-import { urlFor } from "../../sanity/lib/client";
+import { sanityFetch, urlFor } from "../../sanity/lib/client";
 import Link from "next/link";
+import { allClubEventLocationsQuery } from "../../sanity/lib/queries";
 
 export default function NextMatch(Props) {
+  const [locations, setLocations] = React.useState([]);
+
+  React.useEffect(() => {
+    async function fetchLocations() {
+      const locationData = await sanityFetch({
+        query: allClubEventLocationsQuery,
+      });
+      setLocations(locationData);
+    }
+    fetchLocations();
+  }, []);
+
   const nextEvent = React.useMemo(() => {
     if (Props.nextEvent) {
       return Props.nextEvent;
+    }
+
+    if (locations.length === 0) {
+      return null;
     }
 
     const today = new Date();
@@ -18,59 +35,8 @@ export default function NextMatch(Props) {
     nextThursday.setHours(19, 0, 0, 0);
 
     const weekNumber = moment(nextThursday).isoWeek();
-    const fallbackLocations = [
-      {
-        place: "Bio Company (Humboldtbrücke)",
-        image: {
-          _type: "image",
-          asset: {
-            _ref: "image-2144f1c2769b33240c5f29f0c3677b3b36511665-1500x1000-jpg",
-            _type: "reference",
-          },
-        },
-        lng: 13.070731,
-        lat: 52.40277,
-      },
-      {
-        place: "Babelsberg (Weberplatz)",
-        image: {
-          _type: "image",
-          asset: {
-            _ref: "image-78707eefa56d252d2a45d85a904ca61742948b21-1024x734-webp",
-            _type: "reference",
-          },
-        },
-        lng: 13.095297,
-        lat: 52.394214,
-      },
-      {
-        place: "Meilenweit (Laufladen)",
-        image: {
-          _type: "image",
-          asset: {
-            _ref: "image-afd217caeb6196afa88b5e46dce383eb70ad5137-300x168-jpg",
-            _type: "reference",
-          },
-        },
-        lng: 13.052276,
-        lat: 52.401491,
-      },
-      {
-        place: "Dampfmaschinenhaus",
-        image: {
-          _type: "image",
-          asset: {
-            _ref: "image-0cd4c8556e92531fec03c5426e6628aaf31314a1-768x442-jpg",
-            _type: "reference",
-          },
-        },
-        lng: 13.123456,
-        lat: 52.423456,
-      },
-    ];
 
-    const fallback =
-      fallbackLocations[weekNumber % fallbackLocations.length] ?? null;
+    const fallback = locations[weekNumber % locations.length] ?? null;
 
     if (!fallback) {
       return null;
@@ -80,7 +46,7 @@ export default function NextMatch(Props) {
       date: nextThursday.toISOString(),
       ...fallback,
     };
-  }, [Props.nextEvent]);
+  }, [Props.nextEvent, locations]);
 
   const [days, setDays] = React.useState("");
   const [hours, setHours] = React.useState("");
@@ -205,13 +171,23 @@ export default function NextMatch(Props) {
                       </div>
 
                       <Link
-                        className="read-more-btn"
+                        className="read-more-btn next-match-link"
                         href={`https://www.google.com/maps/place/${nextEvent?.lat || 0},${nextEvent?.lng || 0}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
+                        <i
+                          className="bx bx-map"
+                          style={{ marginRight: "5px" }}
+                        ></i>{" "}
                         Zum Treffpunkt
                       </Link>
+                      <span
+                        className="sub-title"
+                        style={{ marginTop: "10px", display: "block" }}
+                      >
+                        Die Teilnahme ist kostenfrei.
+                      </span>
                     </div>
                   </div>
 

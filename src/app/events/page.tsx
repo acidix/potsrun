@@ -1,6 +1,12 @@
 import { sanityFetch } from "../../sanity/lib/client";
 import { allEventsQuery } from "../../sanity/lib/queries";
 
+export const metadata = {
+  title: "Veranstaltungen - PotsRun",
+  description:
+    "Entdecke unsere kommenden Laufveranstaltungen in Potsdam und blicke zurück auf vergangene Events.",
+};
+
 interface EventEntry {
   title: string;
   date: string;
@@ -22,7 +28,7 @@ function formatDate(value: string): string {
 }
 
 function sortAndSplitEvents(events: EventEntry[]) {
-  const now = new Date();
+  const now = new Date(new Date().toDateString());
 
   const upcoming = events
     .filter((event) => {
@@ -73,14 +79,16 @@ function renderEventList(events: EventEntry[]) {
 }
 
 export default async function EventsPage() {
-  const events = (await sanityFetch<
-    { title: string; date: string; distance?: number; participants?: number }[]
-  >({
+  const eventsResponse = await sanityFetch({
     query: allEventsQuery,
     revalidate: 60,
-  })) as EventEntry[];
+  });
 
-  const { upcoming, past } = sortAndSplitEvents(events ?? []);
+  const events = Array.isArray(eventsResponse)
+    ? (eventsResponse as EventEntry[])
+    : [];
+
+  const { upcoming, past } = sortAndSplitEvents(events);
 
   return (
     <>
@@ -100,12 +108,8 @@ export default async function EventsPage() {
       <section className="upcoming-matches-area pt-100 pb-70">
         <div className="container">
           <div className="section-title">
-            <h2>Kommende Wettkämpfe</h2>
-            <p>
-              Hier findest du alle geplanten Wettkämpfe von PotsRun. Die
-              Übersicht basiert auf den Daten aus unserem Sanity CMS und wird
-              regelmäßig aktualisiert.
-            </p>
+            <h2>Kommende Veranstaltungen</h2>
+            <p>Hier findest du alle geplanten Veranstaltungen von PotsRun.</p>
           </div>
 
           <div className="matches-list">{renderEventList(upcoming)}</div>
@@ -115,7 +119,7 @@ export default async function EventsPage() {
       <section className="upcoming-matches-area pt-0 pb-100">
         <div className="container">
           <div className="section-title">
-            <h2>Vergangene Wettkämpfe</h2>
+            <h2>Vergangene Veranstaltungen</h2>
             <p>
               Ein Rückblick auf vergangene Veranstaltungen, bei denen PotsRun
               vertreten war.

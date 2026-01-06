@@ -29,7 +29,7 @@ const BlogPost = (props) => {
                 src={
                   post.image
                     ? urlFor(post.image).width(750).height(500).url()
-                    : ""
+                    : "/images/potsrun-hero-logo.png"
                 }
                 alt="image"
                 width={750}
@@ -87,6 +87,12 @@ const BlogPost = (props) => {
           </div>
 
           <div className="row justify-content-center">{postsList}</div>
+
+          <div className="text-center mt-4">
+            <Link href="/blog" className="read-more-btn">
+              Alle Beiträge anzeigen
+            </Link>
+          </div>
         </div>
       </section>
     </>

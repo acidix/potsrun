@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import Image from "next/image";
 
 const Navbar = () => {
   const [collapsed, setCollapsed] = useState(true);
+  const pathname = usePathname();
 
   const toggleNavbar = () => {
     setCollapsed(!collapsed);
@@ -110,58 +112,97 @@ const Navbar = () => {
           <div className={classOne} id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <AnchorLink
+                <Link
                   onClick={toggleNavbar}
-                  offset={() => 100}
                   className="nav-link active"
-                  href="#home"
+                  href="/"
                 >
                   Home
-                </AnchorLink>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <AnchorLink
-                  onClick={toggleNavbar}
-                  offset={() => -1}
-                  className="nav-link"
-                  href="#matches"
-                >
-                  Wettkämpfe
-                </AnchorLink>
+                {pathname === "/" ? (
+                  <AnchorLink
+                    onClick={toggleNavbar}
+                    offset={() => -1}
+                    className="nav-link"
+                    href="#matches"
+                  >
+                    Veranstaltungen
+                  </AnchorLink>
+                ) : (
+                  <Link
+                    onClick={toggleNavbar}
+                    className="nav-link"
+                    href="/#matches"
+                  >
+                    Veranstaltungen
+                  </Link>
+                )}
               </li>
 
               <li className="nav-item">
-                <AnchorLink
-                  onClick={toggleNavbar}
-                  offset={() => -1}
-                  className="nav-link"
-                  href="#shop"
-                >
-                  Über uns
-                </AnchorLink>
+                {pathname === "/" ? (
+                  <AnchorLink
+                    onClick={toggleNavbar}
+                    offset={() => -1}
+                    className="nav-link"
+                    href="#shop"
+                  >
+                    Über uns
+                  </AnchorLink>
+                ) : (
+                  <Link
+                    onClick={toggleNavbar}
+                    className="nav-link"
+                    href="/#shop"
+                  >
+                    Über uns
+                  </Link>
+                )}
               </li>
 
               <li className="nav-item">
-                <AnchorLink
-                  onClick={toggleNavbar}
-                  offset={() => -1}
-                  className="nav-link"
-                  href="#partners"
-                >
-                  Partner
-                </AnchorLink>
+                {pathname === "/" ? (
+                  <AnchorLink
+                    onClick={toggleNavbar}
+                    offset={() => -1}
+                    className="nav-link"
+                    href="#partners"
+                  >
+                    Partner
+                  </AnchorLink>
+                ) : (
+                  <Link
+                    onClick={toggleNavbar}
+                    className="nav-link"
+                    href="/#partners"
+                  >
+                    Partner
+                  </Link>
+                )}
               </li>
 
               <li className="nav-item">
-                <AnchorLink
-                  onClick={toggleNavbar}
-                  offset={() => -1}
-                  className="nav-link"
-                  href="#news"
-                >
-                  News
-                </AnchorLink>
+                {pathname === "/" ? (
+                  <AnchorLink
+                    onClick={toggleNavbar}
+                    offset={() => -1}
+                    className="nav-link"
+                    href="#news"
+                  >
+                    News
+                  </AnchorLink>
+                ) : (
+                  <Link
+                    onClick={toggleNavbar}
+                    className="nav-link"
+                    href="/#news"
+                  >
+                    News
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

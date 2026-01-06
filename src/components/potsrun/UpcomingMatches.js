@@ -35,11 +35,11 @@ const UpcomingMatches = (props) => {
       <section id="matches" className="upcoming-matches-area pt-100 pb-70">
         <div className="container">
           <div className="section-title">
-            <h2>Kommende Wettkämpfe</h2>
+            <h2>Kommende Veranstaltungen</h2>
             <p>
               Wir starten bei vielen regionalen und überregionalen Events als
-              Potsrun Team. Hier findest du eine Übersicht über die nächsten
-              Wettkämpfe.
+              PotsRun-Team. Hier findest du eine Übersicht über die nächsten
+              Veranstaltungen.
             </p>
           </div>
 
@@ -67,7 +67,7 @@ const UpcomingMatches = (props) => {
 
           <div className="text-center mt-4">
             <Link href="/events" className="read-more-btn">
-              Alle Wettkämpfe anzeigen
+              Alle Veranstaltungen anzeigen
             </Link>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from "next";
 import SingleBlogContent from "../../../components/potsrun/SingleBlog/SingleBlogContent";
 import { client } from "../../../sanity/lib/client";
 
@@ -18,6 +19,20 @@ async function fetchData(params: { slug: string }): Promise<any> {
   return post[0] || {};
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const query = `*[_type == "post" && slug.current == $slug][0].title`;
+  const title = await client.fetch(query, { slug: params.slug });
+
+  return {
+    title: `${title} - PotsRun Blog`,
+    description: `Lies den Beitrag "${title}" auf der PotsRun Webseite.`,
+  };
+}
+
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await fetchData({ slug: params.slug });
   return (
@@ -27,20 +42,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
   );
 }
 
-async function getStaticPaths() {
+export async function generateStaticParams() {
   const query = `*[_type == "post"]{ 'slug': slug.current }`;
-
   const posts = await client.fetch(query);
 
-  const paths =
-    posts?.map((post) => ({
-      params: {
-        slug: post.slug,
-      },
-    })) || [];
-
-  return {
-    paths,
-    fallback: false,
-  };
+  return posts.map((post: any) => ({
+    slug: post.slug,
+  }));
 }

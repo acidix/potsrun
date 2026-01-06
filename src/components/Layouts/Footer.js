@@ -30,7 +30,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://www.strava.com/"
+                    href="https://www.strava.com/clubs/316836"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

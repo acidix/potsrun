@@ -215,7 +215,8 @@ Navbar Area CSS
   font-size: 20px;
   font-weight: 500;
 }
-.navbar-light .navbar-nav .nav-item .nav-link:hover, .navbar-light .navbar-nav .nav-item .nav-link.active {
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item .nav-link.active {
   color: #ffffff;
 }
 .navbar-light .navbar-nav .nav-item.active .nav-link {
@@ -671,17 +672,20 @@ Upcoming Matches Area CSS
 .upcoming-matches-slides .swiper-button-disabled {
   display: none;
 }
-.upcoming-matches-slides .swiper-button-prev, .upcoming-matches-slides .swiper-button-next {
+.upcoming-matches-slides .swiper-button-prev,
+.upcoming-matches-slides .swiper-button-next {
   color: #ffffff;
   background: #161616;
   width: 40px;
   height: 40px;
   transition: 0.5s;
 }
-.upcoming-matches-slides .swiper-button-prev::after, .upcoming-matches-slides .swiper-button-next::after {
+.upcoming-matches-slides .swiper-button-prev::after,
+.upcoming-matches-slides .swiper-button-next::after {
   font-size: 20px;
 }
-.upcoming-matches-slides .swiper-button-prev:hover, .upcoming-matches-slides .swiper-button-next:hover {
+.upcoming-matches-slides .swiper-button-prev:hover,
+.upcoming-matches-slides .swiper-button-next:hover {
   background-color: #1f9ed9;
   color: #fff;
 }
@@ -771,15 +775,18 @@ Matches Highlights Area CSS
   line-height: 1;
 }
 
-.matches-highlights-slides .swiper-button-prev, .matches-highlights-slides .swiper-button-next {
+.matches-highlights-slides .swiper-button-prev,
+.matches-highlights-slides .swiper-button-next {
   color: #959595;
   background: transparent !important;
   transition: 0.5s;
 }
-.matches-highlights-slides .swiper-button-prev::after, .matches-highlights-slides .swiper-button-next::after {
+.matches-highlights-slides .swiper-button-prev::after,
+.matches-highlights-slides .swiper-button-next::after {
   font-size: 40px;
 }
-.matches-highlights-slides .swiper-button-prev:hover, .matches-highlights-slides .swiper-button-next:hover {
+.matches-highlights-slides .swiper-button-prev:hover,
+.matches-highlights-slides .swiper-button-next:hover {
   color: #1f9ed9;
 }
 
@@ -907,17 +914,20 @@ Gallery Area CSS
   max-width: 900px;
   margin-left: 0;
 }
-.gallery-slides .swiper-button-prev, .gallery-slides .swiper-button-next {
+.gallery-slides .swiper-button-prev,
+.gallery-slides .swiper-button-next {
   color: #ffffff;
   background: #161616;
   width: 40px;
   height: 40px;
   transition: 0.5s;
 }
-.gallery-slides .swiper-button-prev::after, .gallery-slides .swiper-button-next::after {
+.gallery-slides .swiper-button-prev::after,
+.gallery-slides .swiper-button-next::after {
   font-size: 20px;
 }
-.gallery-slides .swiper-button-prev:hover, .gallery-slides .swiper-button-next:hover {
+.gallery-slides .swiper-button-prev:hover,
+.gallery-slides .swiper-button-next:hover {
   background-color: #1f9ed9;
   color: #ffffff;
 }
@@ -1009,7 +1019,7 @@ Subscribe Area CSS
 .subscribe-inner-area form .check-info .cbx {
   -webkit-user-select: none;
   -moz-user-select: none;
-       user-select: none;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   margin-bottom: 0;
@@ -1076,24 +1086,45 @@ Subscribe Area CSS
   height: 1px;
   background-color: #c6c6c6;
 }
-.subscribe-inner-area form .check-info .inp-cbx:checked + .cbx span:first-child {
+.subscribe-inner-area
+  form
+  .check-info
+  .inp-cbx:checked
+  + .cbx
+  span:first-child {
   border-color: #1f9ed9;
   background: #1f9ed9;
   animation: check 0.6s ease;
 }
-.subscribe-inner-area form .check-info .inp-cbx:checked + .cbx span:first-child svg {
+.subscribe-inner-area
+  form
+  .check-info
+  .inp-cbx:checked
+  + .cbx
+  span:first-child
+  svg {
   stroke-dashoffset: 0;
 }
-.subscribe-inner-area form .check-info .inp-cbx:checked + .cbx span:first-child:before {
+.subscribe-inner-area
+  form
+  .check-info
+  .inp-cbx:checked
+  + .cbx
+  span:first-child:before {
   transform: scale(2.2);
   opacity: 0;
   transition: all 0.6s ease;
 }
 .subscribe-inner-area form .check-info .inp-cbx:checked + .cbx span:last-child {
-  color: #B9B8C3;
+  color: #b9b8c3;
   transition: all 0.3s ease;
 }
-.subscribe-inner-area form .check-info .inp-cbx:checked + .cbx span:last-child:after {
+.subscribe-inner-area
+  form
+  .check-info
+  .inp-cbx:checked
+  + .cbx
+  span:last-child:after {
   transform: scaleX(1);
   transition: all 0.3s ease;
 }
@@ -1431,7 +1462,8 @@ Blog Details Area CSS
   font-size: 13px;
   margin-left: 5px;
 }
-.blog-details-desc .article-footer .article-share .social li a:hover, .blog-details-desc .article-footer .article-share .social li a:focus {
+.blog-details-desc .article-footer .article-share .social li a:hover,
+.blog-details-desc .article-footer .article-share .social li a:focus {
   color: #1f9ed9;
   background-color: transparent;
 }
@@ -1440,7 +1472,8 @@ Blog Details Area CSS
   border-color: #3b5998;
   color: #ffffff;
 }
-.blog-details-desc .article-footer .article-share .social li a.facebook:hover, .blog-details-desc .article-footer .article-share .social li a.facebook:focus {
+.blog-details-desc .article-footer .article-share .social li a.facebook:hover,
+.blog-details-desc .article-footer .article-share .social li a.facebook:focus {
   color: #3b5998;
   background-color: transparent;
 }
@@ -1449,7 +1482,8 @@ Blog Details Area CSS
   border-color: #1da1f2;
   color: #ffffff;
 }
-.blog-details-desc .article-footer .article-share .social li a.twitter:hover, .blog-details-desc .article-footer .article-share .social li a.twitter:focus {
+.blog-details-desc .article-footer .article-share .social li a.twitter:hover,
+.blog-details-desc .article-footer .article-share .social li a.twitter:focus {
   color: #1da1f2;
   background-color: transparent;
 }
@@ -1458,7 +1492,8 @@ Blog Details Area CSS
   border-color: #007bb5;
   color: #ffffff;
 }
-.blog-details-desc .article-footer .article-share .social li a.linkedin:hover, .blog-details-desc .article-footer .article-share .social li a.linkedin:focus {
+.blog-details-desc .article-footer .article-share .social li a.linkedin:hover,
+.blog-details-desc .article-footer .article-share .social li a.linkedin:focus {
   color: #007bb5;
   background-color: transparent;
 }
@@ -1467,12 +1502,14 @@ Blog Details Area CSS
   border-color: #c13584;
   color: #ffffff;
 }
-.blog-details-desc .article-footer .article-share .social li a.instagram:hover, .blog-details-desc .article-footer .article-share .social li a.instagram:focus {
+.blog-details-desc .article-footer .article-share .social li a.instagram:hover,
+.blog-details-desc .article-footer .article-share .social li a.instagram:focus {
   color: #c13584;
   background-color: transparent;
 }
 
-blockquote, .blockquote {
+blockquote,
+.blockquote {
   overflow: hidden;
   background-color: #161616;
   padding: 50px !important;
@@ -1482,7 +1519,8 @@ blockquote, .blockquote {
   margin-bottom: 20px;
   margin-top: 20px;
 }
-blockquote p, .blockquote p {
+blockquote p,
+.blockquote p {
   color: #ffffff;
   line-height: 1.6;
   margin-bottom: 0;
@@ -1490,10 +1528,12 @@ blockquote p, .blockquote p {
   font-weight: 600;
   font-size: 25px !important;
 }
-blockquote cite, .blockquote cite {
+blockquote cite,
+.blockquote cite {
   display: none;
 }
-blockquote::before, .blockquote::before {
+blockquote::before,
+.blockquote::before {
   color: #212121;
   position: absolute;
   animation: fade-up 1.5s infinite linear;
@@ -1505,7 +1545,8 @@ blockquote::before, .blockquote::before {
   font-style: normal;
   font-size: 135px;
 }
-blockquote::after, .blockquote::after {
+blockquote::after,
+.blockquote::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1703,7 +1744,8 @@ blockquote::after, .blockquote::after {
   font-size: 24px;
   font-weight: 700;
 }
-.comments-area ol, .comments-area ul {
+.comments-area ol,
+.comments-area ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -1788,7 +1830,10 @@ blockquote::after, .blockquote::after {
   font-size: 24px;
   font-weight: 700;
 }
-.comments-area .comment-respond .comment-reply-title #cancel-comment-reply-link {
+.comments-area
+  .comment-respond
+  .comment-reply-title
+  #cancel-comment-reply-link {
   display: inline-block;
 }
 .comments-area .comment-respond .comment-form {
@@ -1809,7 +1854,19 @@ blockquote::after, .blockquote::after {
 .comments-area .comment-respond label {
   display: none;
 }
-.comments-area .comment-respond input[type=date], .comments-area .comment-respond input[type=time], .comments-area .comment-respond input[type=datetime-local], .comments-area .comment-respond input[type=week], .comments-area .comment-respond input[type=month], .comments-area .comment-respond input[type=text], .comments-area .comment-respond input[type=email], .comments-area .comment-respond input[type=url], .comments-area .comment-respond input[type=password], .comments-area .comment-respond input[type=search], .comments-area .comment-respond input[type=tel], .comments-area .comment-respond input[type=number], .comments-area .comment-respond textarea {
+.comments-area .comment-respond input[type="date"],
+.comments-area .comment-respond input[type="time"],
+.comments-area .comment-respond input[type="datetime-local"],
+.comments-area .comment-respond input[type="week"],
+.comments-area .comment-respond input[type="month"],
+.comments-area .comment-respond input[type="text"],
+.comments-area .comment-respond input[type="email"],
+.comments-area .comment-respond input[type="url"],
+.comments-area .comment-respond input[type="password"],
+.comments-area .comment-respond input[type="search"],
+.comments-area .comment-respond input[type="tel"],
+.comments-area .comment-respond input[type="number"],
+.comments-area .comment-respond textarea {
   display: block;
   width: 100%;
   background-color: #161616;
@@ -1822,19 +1879,69 @@ blockquote::after, .blockquote::after {
   font-weight: 400;
   font-size: 16px;
 }
-.comments-area .comment-respond input[type=date]::-moz-placeholder, .comments-area .comment-respond input[type=time]::-moz-placeholder, .comments-area .comment-respond input[type=datetime-local]::-moz-placeholder, .comments-area .comment-respond input[type=week]::-moz-placeholder, .comments-area .comment-respond input[type=month]::-moz-placeholder, .comments-area .comment-respond input[type=text]::-moz-placeholder, .comments-area .comment-respond input[type=email]::-moz-placeholder, .comments-area .comment-respond input[type=url]::-moz-placeholder, .comments-area .comment-respond input[type=password]::-moz-placeholder, .comments-area .comment-respond input[type=search]::-moz-placeholder, .comments-area .comment-respond input[type=tel]::-moz-placeholder, .comments-area .comment-respond input[type=number]::-moz-placeholder, .comments-area .comment-respond textarea::-moz-placeholder {
+.comments-area .comment-respond input[type="date"]::-moz-placeholder,
+.comments-area .comment-respond input[type="time"]::-moz-placeholder,
+.comments-area .comment-respond input[type="datetime-local"]::-moz-placeholder,
+.comments-area .comment-respond input[type="week"]::-moz-placeholder,
+.comments-area .comment-respond input[type="month"]::-moz-placeholder,
+.comments-area .comment-respond input[type="text"]::-moz-placeholder,
+.comments-area .comment-respond input[type="email"]::-moz-placeholder,
+.comments-area .comment-respond input[type="url"]::-moz-placeholder,
+.comments-area .comment-respond input[type="password"]::-moz-placeholder,
+.comments-area .comment-respond input[type="search"]::-moz-placeholder,
+.comments-area .comment-respond input[type="tel"]::-moz-placeholder,
+.comments-area .comment-respond input[type="number"]::-moz-placeholder,
+.comments-area .comment-respond textarea::-moz-placeholder {
   -moz-transition: 0.5s;
   transition: 0.5s;
   color: #c6c6c6;
 }
-.comments-area .comment-respond input[type=date]::placeholder, .comments-area .comment-respond input[type=time]::placeholder, .comments-area .comment-respond input[type=datetime-local]::placeholder, .comments-area .comment-respond input[type=week]::placeholder, .comments-area .comment-respond input[type=month]::placeholder, .comments-area .comment-respond input[type=text]::placeholder, .comments-area .comment-respond input[type=email]::placeholder, .comments-area .comment-respond input[type=url]::placeholder, .comments-area .comment-respond input[type=password]::placeholder, .comments-area .comment-respond input[type=search]::placeholder, .comments-area .comment-respond input[type=tel]::placeholder, .comments-area .comment-respond input[type=number]::placeholder, .comments-area .comment-respond textarea::placeholder {
+.comments-area .comment-respond input[type="date"]::placeholder,
+.comments-area .comment-respond input[type="time"]::placeholder,
+.comments-area .comment-respond input[type="datetime-local"]::placeholder,
+.comments-area .comment-respond input[type="week"]::placeholder,
+.comments-area .comment-respond input[type="month"]::placeholder,
+.comments-area .comment-respond input[type="text"]::placeholder,
+.comments-area .comment-respond input[type="email"]::placeholder,
+.comments-area .comment-respond input[type="url"]::placeholder,
+.comments-area .comment-respond input[type="password"]::placeholder,
+.comments-area .comment-respond input[type="search"]::placeholder,
+.comments-area .comment-respond input[type="tel"]::placeholder,
+.comments-area .comment-respond input[type="number"]::placeholder,
+.comments-area .comment-respond textarea::placeholder {
   transition: 0.5s;
   color: #c6c6c6;
 }
-.comments-area .comment-respond input[type=date]:focus::-moz-placeholder, .comments-area .comment-respond input[type=time]:focus::-moz-placeholder, .comments-area .comment-respond input[type=datetime-local]:focus::-moz-placeholder, .comments-area .comment-respond input[type=week]:focus::-moz-placeholder, .comments-area .comment-respond input[type=month]:focus::-moz-placeholder, .comments-area .comment-respond input[type=text]:focus::-moz-placeholder, .comments-area .comment-respond input[type=email]:focus::-moz-placeholder, .comments-area .comment-respond input[type=url]:focus::-moz-placeholder, .comments-area .comment-respond input[type=password]:focus::-moz-placeholder, .comments-area .comment-respond input[type=search]:focus::-moz-placeholder, .comments-area .comment-respond input[type=tel]:focus::-moz-placeholder, .comments-area .comment-respond input[type=number]:focus::-moz-placeholder, .comments-area .comment-respond textarea:focus::-moz-placeholder {
+.comments-area .comment-respond input[type="date"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="time"]:focus::-moz-placeholder,
+.comments-area
+  .comment-respond
+  input[type="datetime-local"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="week"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="month"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="text"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="email"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="url"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="password"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="search"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="tel"]:focus::-moz-placeholder,
+.comments-area .comment-respond input[type="number"]:focus::-moz-placeholder,
+.comments-area .comment-respond textarea:focus::-moz-placeholder {
   color: transparent;
 }
-.comments-area .comment-respond input[type=date]:focus::placeholder, .comments-area .comment-respond input[type=time]:focus::placeholder, .comments-area .comment-respond input[type=datetime-local]:focus::placeholder, .comments-area .comment-respond input[type=week]:focus::placeholder, .comments-area .comment-respond input[type=month]:focus::placeholder, .comments-area .comment-respond input[type=text]:focus::placeholder, .comments-area .comment-respond input[type=email]:focus::placeholder, .comments-area .comment-respond input[type=url]:focus::placeholder, .comments-area .comment-respond input[type=password]:focus::placeholder, .comments-area .comment-respond input[type=search]:focus::placeholder, .comments-area .comment-respond input[type=tel]:focus::placeholder, .comments-area .comment-respond input[type=number]:focus::placeholder, .comments-area .comment-respond textarea:focus::placeholder {
+.comments-area .comment-respond input[type="date"]:focus::placeholder,
+.comments-area .comment-respond input[type="time"]:focus::placeholder,
+.comments-area .comment-respond input[type="datetime-local"]:focus::placeholder,
+.comments-area .comment-respond input[type="week"]:focus::placeholder,
+.comments-area .comment-respond input[type="month"]:focus::placeholder,
+.comments-area .comment-respond input[type="text"]:focus::placeholder,
+.comments-area .comment-respond input[type="email"]:focus::placeholder,
+.comments-area .comment-respond input[type="url"]:focus::placeholder,
+.comments-area .comment-respond input[type="password"]:focus::placeholder,
+.comments-area .comment-respond input[type="search"]:focus::placeholder,
+.comments-area .comment-respond input[type="tel"]:focus::placeholder,
+.comments-area .comment-respond input[type="number"]:focus::placeholder,
+.comments-area .comment-respond textarea:focus::placeholder {
   color: transparent;
 }
 .comments-area .comment-respond textarea {
@@ -1898,7 +2005,8 @@ blockquote::after, .blockquote::after {
   font-weight: 600;
   font-size: 14.5px;
 }
-.comments-area .comment-respond .form-submit input:hover, .comments-area .comment-respond .form-submit input:focus {
+.comments-area .comment-respond .form-submit input:hover,
+.comments-area .comment-respond .form-submit input:focus {
   color: #000000;
   background: #ffffff;
 }
@@ -2003,24 +2111,138 @@ Footer Area CSS
 .footer-area .info-link li:first-child::before {
   display: none;
 }
-
 .go-top {
   position: fixed;
+  cursor: pointer;
+  bottom: -100px;
   right: 20px;
-  bottom: 20px;
-  z-index: 9999;
+  color: #ffffff;
+  background-color: #1f9ed9;
+  z-index: 4;
+  width: 45px;
+  text-align: center;
+  height: 45px;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 50%;
+  font-size: 22px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
 .go-top i {
-  background-color: #1f9ed9;
-  color: #ffffff;
-  width: 30px;
-  height: 35px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
   text-align: center;
-  line-height: 35px;
-  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #ffffff;
+}
+.go-top i:last-child {
+  top: -50%;
+}
+.go-top:hover {
+  background-color: #000000;
+  color: #ffffff;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.go-top i:hover {
-  background-color: #ffffff;
-  color: #1f9ed9;
-}/*# sourceMappingURL=style.css.map */
+.go-top:hover i:first-child {
+  top: 150%;
+}
+.go-top:hover i:last-child {
+  top: 50%;
+}
+.go-top.active {
+  opacity: 1;
+  visibility: visible;
+  bottom: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  #timer #seconds {
+    display: none !important;
+  }
+  .next-match-link {
+    text-align: center;
+    margin: 40px auto 0px auto;
+  }
+}
+
+.preloader-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99999999;
+  background-color: #000000;
+}
+.preloader-area .loader {
+  width: 8vmax;
+  height: 8vmax;
+  border-right: 4px solid #1f9ed9;
+  border-radius: 100%;
+  animation: spinRight 800ms linear infinite;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -4vmax;
+  margin-top: -4vmax;
+}
+.preloader-area .loader:before,
+.preloader-area .loader:after {
+  content: "";
+  width: 6vmax;
+  height: 6vmax;
+  display: block;
+  position: absolute;
+  top: calc(50% - 3vmax);
+  left: calc(50% - 3vmax);
+  border-left: 3px solid #1f9ed9;
+  border-radius: 100%;
+  animation: spinLeft 800ms linear infinite;
+}
+.preloader-area .loader:after {
+  width: 4vmax;
+  height: 4vmax;
+  top: calc(50% - 2vmax);
+  left: calc(50% - 2vmax);
+  border: 0;
+  border-right: 2px solid #1f9ed9;
+  animation: none;
+}
+@keyframes spinLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg);
+  }
+}
+@keyframes spinRight {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.post-meta-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-meta-rows li::before {
+  display: none;
+}
+
+.single-blog-post .post-content .post-meta li a.author-link {
+  display: inline !important;
+}

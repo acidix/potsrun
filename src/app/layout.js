@@ -16,7 +16,34 @@ const teko = Teko({ subsets: ["latin"] });
 
 export const metadata = {
   title: "PotsRun - Die Potsdamer Laufgruppe",
-  description: "React Nextjs Sports & Athlete Personal Portfolio Template",
+  description:
+    "PotsRun ist deine Laufgruppe in Potsdam. Wir laufen gemeinsam, ohne Leistungsdruck und mit viel Spaß. Schließ dich uns an!",
+  keywords: [
+    "Laufen",
+    "Potsdam",
+    "Laufgruppe",
+    "Joggen",
+    "Sport",
+    "Community",
+    "PotsRun",
+  ],
+  openGraph: {
+    title: "PotsRun - Die Potsdamer Laufgruppe",
+    description:
+      "Gemeinsam laufen in Potsdam. Trete unserer kostenlosen Laufgruppe bei!",
+    url: "https://www.potsrun.de",
+    siteName: "PotsRun",
+    images: [
+      {
+        url: "/images/potsrun_team1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "PotsRun Laufgruppe",
+      },
+    ],
+    locale: "de_DE",
+    type: "website",
+  },
   icons: {
     icon: [
       { url: "/images/favicon.ico" },
@@ -38,7 +65,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="de">
       <body className={teko.className}>
         {children}
 

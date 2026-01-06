@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Impressum - PotsRun",
+  description: "Impressum und rechtliche Angaben zu PotsRun.",
+};
+
 export default async function Page() {
   return (
     <>
@@ -25,7 +30,7 @@ export default async function Page() {
 
                 <h2>Angaben gemäß § 5 TMG</h2>
                 <p>
-                  <strong>Mirko Seiffert</strong>
+                  <strong>Mirko Seifert</strong>
                   <br />
                   Zeppelinstraße 57
                   <br />
@@ -41,7 +46,7 @@ export default async function Page() {
                 </p>
                 <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
                 <p>
-                  Mirko Seiffert
+                  Mirko Seifert
                   <br />
                   Zeppelinstraße 57, 14471 Potsdam
                 </p>
@@ -118,6 +123,9 @@ export default async function Page() {
                   Bei Bekanntwerden von Rechtsverletzungen werde ich derartige
                   Inhalte umgehend entfernen.
                 </p>
+
+                <h2>Bild- und Videonachweise</h2>
+                <p>Header-Video: Copyright by Arne Büttner 2025</p>
 
                 <p>
                   <strong>Stand:</strong> 17.10.2025
