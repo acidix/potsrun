@@ -17,8 +17,10 @@ export default function NextMatch(Props) {
       });
       setLocations(locationData);
     }
-    fetchLocations();
-  }, []);
+    if (!Props.nextEvent) {
+      fetchLocations();
+    }
+  }, [Props.nextEvent]);
 
   const nextEvent = React.useMemo(() => {
     if (Props.nextEvent) {
@@ -33,6 +35,11 @@ export default function NextMatch(Props) {
     const nextThursday = new Date(today);
     nextThursday.setDate(today.getDate() + ((4 - today.getDay() + 7) % 7));
     nextThursday.setHours(19, 0, 0, 0);
+
+    // If nextThursday is in the past, add 7 days.
+    if (nextThursday.getTime() < today.getTime()) {
+      nextThursday.setDate(nextThursday.getDate() + 7);
+    }
 
     const weekNumber = moment(nextThursday).isoWeek();
 
@@ -108,128 +115,142 @@ export default function NextMatch(Props) {
     return () => clearInterval(interval);
   }, [commingSoonTime]);
 
-  if (nextEvent !== null && nextEvent !== undefined) {
+  if (nextEvent === null || nextEvent === undefined) {
     return (
-      <>
         <section className="next-match-area">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-lg-6 col-md-12">
-                <div className="next-match-content">
-                  <div className="content">
-                    <div className="row align-items-center">
-                      <div className="col-lg-5 col-md-5">
-                        <h2>Nächster Donnerstagslauf</h2>
-                        <span className="sub-title">
-                          {nextEvent !== null && "place" in nextEvent
-                            ? nextEvent.place
-                            : "Noch nicht klar"}{" "}
-                          -{" "}
-                          {nextEvent !== null && "date" in nextEvent
-                            ? moment(new Date(nextEvent.date)).format(
-                                "DD.MM.YYYY",
-                              )
-                            : "Noch nicht klar"}
-                        </span>
-                      </div>
-
-                      <div className="col-lg-7 col-md-7">
-                        <div
-                          id="timer"
-                          className="flex-wrap d-flex justify-content-center"
-                        >
-                          <div
-                            id="days"
-                            className="align-items-center flex-column d-flex justify-content-center"
-                          >
-                            {days} <span>{days == "1" ? "Tag" : "Tage"}</span>
-                          </div>
-                          <div
-                            id="hours"
-                            className="align-items-center flex-column d-flex justify-content-center"
-                          >
-                            {hours}{" "}
-                            <span>{hours == "1" ? "Stunde" : "Stunden"}</span>
-                          </div>
-                          <div
-                            id="minutes"
-                            className="align-items-center flex-column d-flex justify-content-center"
-                          >
-                            {minutes}{" "}
-                            <span>{minutes == "1" ? "Minute" : "Minuten"}</span>
-                          </div>
-                          <div
-                            id="seconds"
-                            className="align-items-center flex-column d-flex justify-content-center"
-                          >
-                            {seconds}{" "}
-                            <span>
-                              {seconds == "1" ? "Sekunde" : "Sekunden"}
-                            </span>
-                          </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="next-match-content">
+                            <div className="content">
+                                <h2>Der nächste Termin wird bald bekannt gegeben.</h2>
+                            </div>
                         </div>
-                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+  }
 
-                      <Link
-                        className="read-more-btn next-match-link"
-                        href={`https://www.google.com/maps/place/${nextEvent?.lat || 0},${nextEvent?.lng || 0}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <i
-                          className="bx bx-map"
-                          style={{ marginRight: "5px" }}
-                        ></i>{" "}
-                        Zum Treffpunkt
-                      </Link>
-                      <span
-                        className="sub-title"
-                        style={{ marginTop: "10px", display: "block" }}
-                      >
-                        Die Teilnahme ist kostenfrei.
+  return (
+    <>
+      <section className="next-match-area">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-6 col-md-12">
+              <div className="next-match-content">
+                <div className="content">
+                  <div className="row align-items-center">
+                    <div className="col-lg-5 col-md-5">
+                      <h2>Nächster Donnerstagslauf</h2>
+                      <span className="sub-title">
+                        {nextEvent !== null && "place" in nextEvent
+                          ? nextEvent.place
+                          : "Noch nicht klar"}{" "}
+                        -{" "}
+                        {nextEvent !== null && "date" in nextEvent
+                          ? moment(new Date(nextEvent.date)).format(
+                              "DD.MM.YYYY",
+                            )
+                          : "Noch nicht klar"}
                       </span>
                     </div>
-                  </div>
 
-                  <div className="shape1">
-                    <Image
-                      src="/images/potsrun/footb-playing.png"
-                      alt="image"
-                      width={854}
-                      height={319}
-                    />
+                    <div className="col-lg-7 col-md-7">
+                      <div
+                        id="timer"
+                        className="flex-wrap d-flex justify-content-center"
+                      >
+                        <div
+                          id="days"
+                          className="align-items-center flex-column d-flex justify-content-center"
+                        >
+                          {days} <span>{days == "1" ? "Tag" : "Tage"}</span>
+                        </div>
+                        <div
+                          id="hours"
+                          className="align-items-center flex-column d-flex justify-content-center"
+                        >
+                          {hours}{" "}
+                          <span>{hours == "1" ? "Stunde" : "Stunden"}</span>
+                        </div>
+                        <div
+                          id="minutes"
+                          className="align-items-center flex-column d-flex justify-content-center"
+                        >
+                          {minutes}{" "}
+                          <span>{minutes == "1" ? "Minute" : "Minuten"}</span>
+                        </div>
+                        <div
+                          id="seconds"
+                          className="align-items-center flex-column d-flex justify-content-center"
+                        >
+                          {seconds}{" "}
+                          <span>
+                            {seconds == "1" ? "Sekunde" : "Sekunden"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link
+                      className="read-more-btn next-match-link"
+                      href={`https://www.google.com/maps/place/${nextEvent?.lat || 0},${nextEvent?.lng || 0}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i
+                        className="bx bx-map"
+                        style={{ marginRight: "5px" }}
+                      ></i>{" "}
+                      Zum Treffpunkt
+                    </Link>
+                    <span
+                      className="sub-title"
+                      style={{ marginTop: "10px", display: "block" }}
+                    >
+                      Die Teilnahme ist kostenfrei.
+                    </span>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-lg-6 col-md-12">
-                <div
-                  className="next-match-image"
-                  style={{
-                    backgroundImage:
-                      (nextEvent?.image &&
-                        `url(${urlFor(nextEvent.image).width(945).height(350).url()})`) ||
-                      "url()",
-                  }}
-                >
+                <div className="shape1">
                   <Image
-                    src={
-                      (nextEvent?.image &&
-                        urlFor(nextEvent.image).width(945).height(350).url()) ||
-                      ""
-                    }
+                    src="/images/potsrun/footb-playing.png"
                     alt="image"
-                    width={945}
-                    height={350}
+                    width={854}
+                    height={319}
                   />
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </>
-    );
-  }
 
-  return null;
+            <div className="col-lg-6 col-md-12">
+              <div
+                className="next-match-image"
+                style={{
+                  backgroundImage:
+                    (nextEvent?.image &&
+                      `url(${urlFor(nextEvent.image).width(945).height(350).url()})`) ||
+                    "url()",
+                }}
+              >
+                <Image
+                  src={
+                    (nextEvent?.image &&
+                      urlFor(nextEvent.image).width(945).height(350).url()) ||
+                    ""
+                  }
+                  alt="image"
+                  width={945}
+                  height={350}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

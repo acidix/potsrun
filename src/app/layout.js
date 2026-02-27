@@ -11,6 +11,7 @@ import "../../styles/responsive.css";
 import { Teko } from "next/font/google";
 import GoTop from "@/components/Shared/GoTop";
 import AosAnimation from "@/components/Layouts/AosAnimation";
+import Script from "next/script";
 
 const teko = Teko({ subsets: ["latin"] });
 
@@ -67,6 +68,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="de">
       <body className={teko.className}>
+        <Script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="e846624c-7e96-4f2c-ae3a-2015b2af6bc8"
+          data-blockingmode="auto"
+          type="text/javascript"
+          strategy="beforeInteractive"
+        />
+
         {children}
 
         <AosAnimation />

@@ -51,22 +51,6 @@ export default async function Page() {
                   Zeppelinstraße 57, 14471 Potsdam
                 </p>
 
-                <h2>EU-Streitschlichtung</h2>
-                <p>
-                  Die Europäische Kommission stellt eine Plattform zur
-                  Online-Streitbeilegung (OS) bereit:
-                  <br />
-                  <a
-                    href="https://ec.europa.eu/consumers/odr/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    https://ec.europa.eu/consumers/odr/
-                  </a>
-                  .<br />
-                  Meine E-Mail-Adresse finden Sie oben im Impressum.
-                </p>
-
                 <h2>Haftung für Inhalte</h2>
                 <p>
                   Als Diensteanbieter bin ich gemäß § 7 Abs.1 TMG für eigene
@@ -128,7 +112,7 @@ export default async function Page() {
                 <p>Header-Video: Copyright by Arne Büttner 2025</p>
 
                 <p>
-                  <strong>Stand:</strong> 17.10.2025
+                  <strong>Stand:</strong> 24.02.2026
                 </p>
               </div>
             </div>
