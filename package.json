@@ -17,6 +17,7 @@
     "aos": "^2.3.4",
     "fslightbox-react": "^1.7.6",
     "moment": "^2.30.1",
+    "moment-timezone": "^0.6.1",
     "next": "14.2.15",
     "next-sanity": "^9.5.5",
     "react": "^18",

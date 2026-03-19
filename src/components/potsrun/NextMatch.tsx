@@ -2,58 +2,150 @@
 
 import React from "react";
 import Image from "next/image";
-import moment from "moment";
+import moment from "moment-timezone";
 import { sanityFetch, urlFor } from "../../sanity/lib/client";
 import Link from "next/link";
-import { allClubEventLocationsQuery } from "../../sanity/lib/queries";
+import {
+  allClubEventLocationsQuery,
+  nextClubEventQuery,
+} from "../../sanity/lib/queries";
 
-export default function NextMatch(Props) {
-  const [locations, setLocations] = React.useState([]);
+const BERLIN_TIMEZONE = "Europe/Berlin";
+
+// Explicit rotation order - this defines the 4-week cycle
+// The order in this array determines the rotation sequence
+// Index 0 = week 12, 16, 20... (BioCompany)
+// Index 1 = week 13, 17, 21... (Meilenweit)
+// Index 2 = week 14, 18, 22... (Weberplatz)
+// Index 3 = week 15, 19, 23... (Dampfmaschinenhaus)
+const ROTATION_ORDER = [
+  "BioCompany",
+  "Meilenweit",
+  "Weberplatz",
+  "Dampfmaschinenhaus",
+];
+
+// Base week that starts the rotation (CW12 should be index 0)
+const ROTATION_BASE_WEEK = 12;
+
+// Normalize location name for comparison
+function normalizeLocationName(name: string | undefined): string {
+  if (!name) return "";
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+// Get rotation index (0-3) for a given ISO week number
+function getRotationIndex(weekNumber: number, year?: number): number {
+  const baseYear = 2025;
+  const baseWeek = ROTATION_BASE_WEEK;
+
+  let weeksDiff = 0;
+  if (year !== undefined && year !== baseYear) {
+    const yearsDiff = year - baseYear;
+    weeksDiff += yearsDiff * 52;
+  }
+  weeksDiff += weekNumber - baseWeek;
+
+  const offset = ((weeksDiff % 4) + 4) % 4;
+  return offset;
+}
+
+// Match location name against rotation order
+function findLocationByRotationIndex(locations: any[], rotationIndex: number): any {
+  const expectedName = ROTATION_ORDER[rotationIndex];
+  const normalizedExpected = normalizeLocationName(expectedName);
+
+  let match = locations.find((loc) => loc.place === expectedName);
+
+  if (!match) {
+    match = locations.find(
+      (loc) => normalizeLocationName(loc.place) === normalizedExpected
+    );
+  }
+
+  if (!match) {
+    match = locations.find((loc) => {
+      const normalizedLoc = normalizeLocationName(loc.place);
+      return (
+        normalizedLoc.includes(normalizedExpected) ||
+        normalizedExpected.includes(normalizedLoc)
+      );
+    });
+  }
+
+  return match ?? locations[rotationIndex] ?? null;
+}
+
+// Get next Thursday at 19:00 Berlin time
+function getNextThursdayBerlin(): moment.Moment {
+  const now = moment().tz(BERLIN_TIMEZONE);
+  const nextThursday = now.clone().day(4).hour(19).minute(0).second(0);
+
+  if (nextThursday.isBefore(now)) {
+    nextThursday.add(7, "days");
+  }
+
+  return nextThursday;
+}
+
+export default function NextMatch() {
+  const [nextEvent, setNextEvent] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    async function fetchLocations() {
-      const locationData = await sanityFetch({
-        query: allClubEventLocationsQuery,
-      });
-      setLocations(locationData);
+    async function fetchNextEvent() {
+      try {
+        // First, try to get an upcoming event from Sanity
+        const upcomingEvent = await sanityFetch({
+          query: nextClubEventQuery,
+        });
+
+        if (upcomingEvent) {
+          setNextEvent(upcomingEvent);
+          setLoading(false);
+          return;
+        }
+
+        // No upcoming event in Sanity, use fallback rotation
+        const locations = await sanityFetch({
+          query: allClubEventLocationsQuery,
+        });
+
+        if (locations.length === 0) {
+          setNextEvent(null);
+          setLoading(false);
+          return;
+        }
+
+        const nextThursday = getNextThursdayBerlin();
+        const weekNumber = nextThursday.isoWeek();
+        const year = nextThursday.year();
+        const rotationIndex = getRotationIndex(weekNumber, year);
+        const fallback = findLocationByRotationIndex(locations, rotationIndex);
+
+        if (!fallback) {
+          setNextEvent(null);
+          setLoading(false);
+          return;
+        }
+
+        setNextEvent({
+          date: nextThursday.toISOString(),
+          ...fallback,
+        });
+      } catch (error) {
+        console.error("Error fetching next event:", error);
+        setNextEvent(null);
+      } finally {
+        setLoading(false);
+      }
     }
-    if (!Props.nextEvent) {
-      fetchLocations();
-    }
-  }, [Props.nextEvent]);
 
-  const nextEvent = React.useMemo(() => {
-    if (Props.nextEvent) {
-      return Props.nextEvent;
-    }
-
-    if (locations.length === 0) {
-      return null;
-    }
-
-    const today = new Date();
-    const nextThursday = new Date(today);
-    nextThursday.setDate(today.getDate() + ((4 - today.getDay() + 7) % 7));
-    nextThursday.setHours(19, 0, 0, 0);
-
-    // If nextThursday is in the past, add 7 days.
-    if (nextThursday.getTime() < today.getTime()) {
-      nextThursday.setDate(nextThursday.getDate() + 7);
-    }
-
-    const weekNumber = moment(nextThursday).isoWeek();
-
-    const fallback = locations[weekNumber % locations.length] ?? null;
-
-    if (!fallback) {
-      return null;
-    }
-
-    return {
-      date: nextThursday.toISOString(),
-      ...fallback,
-    };
-  }, [Props.nextEvent, locations]);
+    fetchNextEvent();
+  }, []);
 
   const [days, setDays] = React.useState("");
   const [hours, setHours] = React.useState("");
@@ -69,41 +161,27 @@ export default function NextMatch(Props) {
       return;
     }
 
-    const endTime = new Date(nextEvent.date);
-    const endTimeParse = Date.parse(endTime.toString()) / 1000;
-    const now = new Date();
-    const nowParse = Date.parse(now.toString()) / 1000;
-    const timeLeft = endTimeParse - nowParse;
+    const endTime = moment(nextEvent.date);
+    const now = moment();
+    const timeLeft = endTime.diff(now, "seconds");
 
-    const calculatedDays = Math.max(0, Math.floor(timeLeft / 86400));
-    const calculatedHours = Math.max(
-      0,
-      Math.floor((timeLeft - calculatedDays * 86400) / 3600),
-    );
-    const calculatedMinutes = Math.max(
-      0,
-      Math.floor(
-        (timeLeft - calculatedDays * 86400 - calculatedHours * 3600) / 60,
-      ),
-    );
-    const calculatedSeconds = Math.max(
-      0,
-      Math.floor(
-        timeLeft -
-          calculatedDays * 86400 -
-          calculatedHours * 3600 -
-          calculatedMinutes * 60,
-      ),
-    );
+    if (timeLeft <= 0) {
+      setDays("0");
+      setHours("00");
+      setMinutes("00");
+      setSeconds("00");
+      return;
+    }
 
-    const hourstring = calculatedHours.toString().padStart(2, "0");
-    const minutestring = calculatedMinutes.toString().padStart(2, "0");
-    const secondstring = calculatedSeconds.toString().padStart(2, "0");
+    const calculatedDays = Math.floor(timeLeft / 86400);
+    const calculatedHours = Math.floor((timeLeft % 86400) / 3600);
+    const calculatedMinutes = Math.floor((timeLeft % 3600) / 60);
+    const calculatedSeconds = timeLeft % 60;
 
     setDays(String(calculatedDays));
-    setHours(hourstring);
-    setMinutes(minutestring);
-    setSeconds(secondstring);
+    setHours(calculatedHours.toString().padStart(2, "0"));
+    setMinutes(calculatedMinutes.toString().padStart(2, "0"));
+    setSeconds(calculatedSeconds.toString().padStart(2, "0"));
   }, [nextEvent]);
 
   React.useEffect(() => {
@@ -115,21 +193,39 @@ export default function NextMatch(Props) {
     return () => clearInterval(interval);
   }, [commingSoonTime]);
 
+  if (loading) {
+    return (
+      <section className="next-match-area">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12">
+              <div className="next-match-content">
+                <div className="content">
+                  <h2>Lade nächsten Lauf...</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (nextEvent === null || nextEvent === undefined) {
     return (
-        <section className="next-match-area">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="next-match-content">
-                            <div className="content">
-                                <h2>Der nächste Termin wird bald bekannt gegeben.</h2>
-                            </div>
-                        </div>
-                    </div>
+      <section className="next-match-area">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12">
+              <div className="next-match-content">
+                <div className="content">
+                  <h2>Der nächste Termin wird bald bekannt gegeben.</h2>
                 </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
     );
   }
 
@@ -150,9 +246,7 @@ export default function NextMatch(Props) {
                           : "Noch nicht klar"}{" "}
                         -{" "}
                         {nextEvent !== null && "date" in nextEvent
-                          ? moment(new Date(nextEvent.date)).format(
-                              "DD.MM.YYYY",
-                            )
+                          ? moment(nextEvent.date).format("DD.MM.YYYY")
                           : "Noch nicht klar"}
                       </span>
                     </div>

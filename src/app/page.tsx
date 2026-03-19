@@ -8,7 +8,6 @@ import Footer from "../components/Layouts/Footer";
 import { sanityFetch } from "../sanity/lib/client";
 import {
   blogQuery,
-  nextClubEventQuery,
   nextEventsQuery,
 } from "../sanity/lib/queries";
 import dynamic from "next/dynamic";
@@ -33,16 +32,11 @@ const NextMatch = dynamic(() => import("../components/potsrun/NextMatch"), {
 });
 
 interface Props {
-  nextClubEvent: any;
   nextEvents: any;
   blogPosts: any;
 }
 
 async function fetchData(): Promise<Props> {
-  const nextClubEvent = await sanityFetch({
-    query: nextClubEventQuery,
-  });
-
   const nextEvents = await sanityFetch({
     query: nextEventsQuery,
   });
@@ -52,7 +46,6 @@ async function fetchData(): Promise<Props> {
   });
 
   return {
-    nextClubEvent: nextClubEvent,
     nextEvents: nextEvents,
     blogPosts: blogPosts,
   };
@@ -66,7 +59,7 @@ export default async function Home() {
 
       <Banner />
 
-      <NextMatch nextEvent={data.nextClubEvent} />
+      <NextMatch />
 
       <UpcomingMatches events={data.nextEvents} />
 

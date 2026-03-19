@@ -55,10 +55,10 @@ export const allBlogPostsQuery = defineQuery(
 );
 
 export const allClubEventLocationsQuery = defineQuery(
-  `*[_type == "clubEvent"]{
+  `*[_type == "clubEvent"] | order(date asc){
  "place": place->name,
   'image': place->image.asset,
   'lng': place->location.lng,
   'lat': place->location.lat,
-}`,
+}`
 );
