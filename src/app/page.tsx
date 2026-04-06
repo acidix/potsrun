@@ -10,26 +10,7 @@ import {
   blogQuery,
   nextEventsQuery,
 } from "../sanity/lib/queries";
-import dynamic from "next/dynamic";
-
-const NextMatch = dynamic(() => import("../components/potsrun/NextMatch"), {
-  ssr: false,
-  loading: () => (
-    <section className="next-match-area">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12">
-            <div className="next-match-content">
-              <div className="content">
-                <h2>Lade nächsten Lauf...</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  ),
-});
+import NextMatch from "../components/potsrun/NextMatch";
 
 interface Props {
   nextEvents: any;

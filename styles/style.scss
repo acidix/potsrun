@@ -803,8 +803,9 @@ Upcoming Matches Area CSS
         height: 40px;
         transition: $transition;
 
-        &::after {
-            font-size: 20px;
+        svg {
+            width: 20px;
+            height: 20px;
         }
 
         &:hover {
@@ -918,8 +919,9 @@ Matches Highlights Area CSS
         background: transparent !important;
         transition: $transition;
 
-        &::after {
-            font-size: 40px;
+        svg {
+            width: 40px;
+            height: 40px;
         }
 
         &:hover {
@@ -1070,8 +1072,9 @@ Gallery Area CSS
         height: 40px;
         transition: $transition;
 
-        &::after {
-            font-size: 20px;
+        svg {
+            width: 20px;
+            height: 20px;
         }
 
         &:hover {

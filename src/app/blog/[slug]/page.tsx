@@ -22,10 +22,11 @@ async function fetchData(params: { slug: string }): Promise<any> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const { slug } = await params;
   const query = `*[_type == "post" && slug.current == $slug][0].title`;
-  const title = await client.fetch(query, { slug: params.slug });
+  const title = await client.fetch(query, { slug });
 
   return {
     title: `${title} - PotsRun Blog`,
@@ -33,8 +34,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await fetchData({ slug: params.slug });
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await fetchData({ slug });
   return (
     <>
       <SingleBlogContent post={post} />

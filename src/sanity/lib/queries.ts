@@ -15,7 +15,7 @@ export const nextEventsQuery = defineQuery(
     _type == "event" &&
     string::split(string(date), "T")[0] >= string::split(string(now()), "T")[0]
   ]
-  | order(date asc, _id asc)[0..4] {
+  | order(date asc, _id asc)[0..5] {
     title,
     date,
     distance,
@@ -55,10 +55,10 @@ export const allBlogPostsQuery = defineQuery(
 );
 
 export const allClubEventLocationsQuery = defineQuery(
-  `*[_type == "clubEvent"] | order(date asc){
- "place": place->name,
-  'image': place->image.asset,
-  'lng': place->location.lng,
-  'lat': place->location.lat,
+  `*[_type == "location"] {
+ "place": name,
+  'image': image.asset,
+  'lng': location.lng,
+  'lat': location.lat,
 }`
 );

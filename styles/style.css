@@ -680,9 +680,10 @@ Upcoming Matches Area CSS
   height: 40px;
   transition: 0.5s;
 }
-.upcoming-matches-slides .swiper-button-prev::after,
-.upcoming-matches-slides .swiper-button-next::after {
-  font-size: 20px;
+.upcoming-matches-slides .swiper-button-prev svg,
+.upcoming-matches-slides .swiper-button-next svg {
+  width: 20px;
+  height: 20px;
 }
 .upcoming-matches-slides .swiper-button-prev:hover,
 .upcoming-matches-slides .swiper-button-next:hover {
@@ -781,9 +782,10 @@ Matches Highlights Area CSS
   background: transparent !important;
   transition: 0.5s;
 }
-.matches-highlights-slides .swiper-button-prev::after,
-.matches-highlights-slides .swiper-button-next::after {
-  font-size: 40px;
+.matches-highlights-slides .swiper-button-prev svg,
+.matches-highlights-slides .swiper-button-next svg {
+  width: 40px;
+  height: 40px;
 }
 .matches-highlights-slides .swiper-button-prev:hover,
 .matches-highlights-slides .swiper-button-next:hover {
@@ -922,9 +924,10 @@ Gallery Area CSS
   height: 40px;
   transition: 0.5s;
 }
-.gallery-slides .swiper-button-prev::after,
-.gallery-slides .swiper-button-next::after {
-  font-size: 20px;
+.gallery-slides .swiper-button-prev svg,
+.gallery-slides .swiper-button-next svg {
+  width: 20px;
+  height: 20px;
 }
 .gallery-slides .swiper-button-prev:hover,
 .gallery-slides .swiper-button-next:hover {

@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     const revalidationTag = body.slug
       ? `${body._type}:${body.slug}`
       : body._type
-    await revalidateTag(revalidationTag)
+    await revalidateTag(revalidationTag, "default")
     const message = `revalidated tag: ${revalidationTag}`
     return NextResponse.json({ body, message })
   } catch (err) {
