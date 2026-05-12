@@ -21,6 +21,13 @@ export const clubEventType = defineType({
       name: 'remarks',
       type: 'string',
     }),
+    defineField({
+      name: 'skipEvent',
+      title: 'Skip this event',
+      type: 'boolean',
+      description: 'If enabled, this event will be skipped and the schedule advances one week.',
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

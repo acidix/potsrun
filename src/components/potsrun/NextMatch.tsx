@@ -98,31 +98,70 @@ export default function NextMatch() {
   React.useEffect(() => {
     async function fetchNextEvent() {
       try {
-        // First, try to get an upcoming event from Sanity
-        const upcomingEvent = await sanityFetch({
+        // Fetch up to 2 upcoming events so we can inspect the first and handle skip
+        const upcomingEvents: any[] = await sanityFetch({
           query: nextClubEventQuery,
         });
 
-        if (upcomingEvent) {
-          setNextEvent(upcomingEvent);
-          setLoading(false);
-          return;
-        }
-
-        // No upcoming event in Sanity, use fallback rotation
+        // Compute fallback Thursday regardless — needed for same-day comparison
         const locations = await sanityFetch({
           query: allClubEventLocationsQuery,
         });
 
+        const nextThursday = getNextThursdayBerlin();
+        const weekNumber = nextThursday.isoWeek();
+        const year = nextThursday.year();
+
+        const getFallbackForThursday = (thursday: moment.Moment) => {
+          if (locations.length === 0) return null;
+          const wn = thursday.isoWeek();
+          const yr = thursday.year();
+          const rotationIndex = getRotationIndex(wn, yr);
+          return findLocationByRotationIndex(locations, rotationIndex);
+        };
+
+        if (upcomingEvents && upcomingEvents.length > 0) {
+          const firstEvent = upcomingEvents[0];
+
+          // If the event is marked as skipped, advance one week
+          if (firstEvent.skipEvent === true) {
+            const nextWeekThursday = nextThursday.clone().add(7, "days");
+            const fallback = getFallbackForThursday(nextWeekThursday);
+            if (!fallback) {
+              setNextEvent(null);
+              setLoading(false);
+              return;
+            }
+            setNextEvent({
+              date: nextWeekThursday.toISOString(),
+              ...fallback,
+            });
+            setLoading(false);
+            return;
+          }
+
+          // Check if the Sanity event is before the scheduled Thursday
+          // (e.g. someone entered a Monday event — don't skip the Thursday)
+          const sanityDate = moment(firstEvent.date).tz(BERLIN_TIMEZONE);
+          const isBeforeScheduledThursday = sanityDate.isBefore(nextThursday, "day");
+
+          if (isBeforeScheduledThursday) {
+            // Ignore the Sanity event and fall through to the rotation fallback below
+          } else {
+            // Same day as Thursday or a future different date — use Sanity event as-is
+            setNextEvent(firstEvent);
+            setLoading(false);
+            return;
+          }
+        }
+
+        // No upcoming Sanity events — use fallback rotation
         if (locations.length === 0) {
           setNextEvent(null);
           setLoading(false);
           return;
         }
 
-        const nextThursday = getNextThursdayBerlin();
-        const weekNumber = nextThursday.isoWeek();
-        const year = nextThursday.year();
         const rotationIndex = getRotationIndex(weekNumber, year);
         const fallback = findLocationByRotationIndex(locations, rotationIndex);
 
