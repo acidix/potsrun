@@ -1,0 +1,24 @@
+# Code owners are automatically requested for review on pull requests that
+# touch the files below. A code owner review is required before merge (enforced
+# via branch protection on `main`).
+#
+# Syntax: <pattern> <owner> [<owner> ...]
+
+# Default owner for everything in the repository.
+* @acidix
+
+# Infrastructure, CI/CD and security-sensitive configuration.
+/.github/ @acidix
+/package.json @acidix
+/package-lock.json @acidix
+/next.config.mjs @acidix
+/tsconfig.json @acidix
+/eslint.config.mjs @acidix
+/sanity.config.ts @acidix
+/sanity.cli.ts @acidix
+
+# Content model and data access layer.
+/src/sanity/ @acidix
+
+# Security policy itself.
+/SECURITY.md @acidix
