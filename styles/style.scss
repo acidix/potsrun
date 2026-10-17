@@ -683,6 +683,75 @@ Next Match Area CSS
         display: none;
     }
 }
+.next-locations-strip {
+    background-color: $black-color;
+
+    .container-fluid {
+        padding: {
+            left: 0;
+            right: 0;
+        };
+        .row {
+            margin: {
+                left: 0;
+                right: 0;
+            };
+            > div {
+                padding: {
+                    left: 0;
+                    right: 0;
+                };
+            }
+        }
+    }
+}
+.next-locations-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: $white-color;
+    background-color: $black-color;
+    height: 100%;
+    padding: {
+        top: 6px;
+        bottom: 6px;
+        left: 15px;
+        right: 15px;
+    };
+    transition: $transition;
+
+    .text {
+        display: inline-block;
+        text-align: left;
+    }
+    .date {
+        display: block;
+        font-size: 14px;
+        line-height: 1.2;
+        color: $optional-color;
+        margin-bottom: 0;
+    }
+    h3 {
+        margin-bottom: 0;
+        font-size: 24px;
+        line-height: 1.1;
+        color: $white-color;
+
+        &.sizer {
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    }
+    &.is-current {
+        background-color: $main-color;
+
+        .date {
+            color: $white-color;
+        }
+    }
+}
 
 /*================================================
 Upcoming Matches Area CSS
