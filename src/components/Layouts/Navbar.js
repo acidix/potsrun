@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import AnchorLink from "react-anchor-link-smooth-scroll";
 import Image from "next/image";
 
 const Navbar = () => {
@@ -12,6 +11,20 @@ const Navbar = () => {
 
   const toggleNavbar = () => {
     setCollapsed(!collapsed);
+  };
+
+  const handleSectionClick = (event, id) => {
+    setCollapsed(true);
+    if (pathname !== "/") {
+      return;
+    }
+    const section = document.getElementById(id);
+    if (!section) {
+      return;
+    }
+    event.preventDefault();
+    const top = section.getBoundingClientRect().top + window.scrollY;
+    window.setTimeout(() => window.scrollTo({ top }), 0);
   };
 
   useEffect(() => {
@@ -28,7 +41,9 @@ const Navbar = () => {
     };
 
     document.addEventListener("scroll", handleScroll);
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
 
     return () => {
       document.removeEventListener("scroll", handleScroll);
@@ -122,87 +137,43 @@ const Navbar = () => {
               </li>
 
               <li className="nav-item">
-                {pathname === "/" ? (
-                  <AnchorLink
-                    onClick={toggleNavbar}
-                    offset={() => -1}
-                    className="nav-link"
-                    href="#matches"
-                  >
-                    Veranstaltungen
-                  </AnchorLink>
-                ) : (
-                  <Link
-                    onClick={toggleNavbar}
-                    className="nav-link"
-                    href="/#matches"
-                  >
-                    Veranstaltungen
-                  </Link>
-                )}
+                <Link
+                  onClick={(event) => handleSectionClick(event, "matches")}
+                  className="nav-link"
+                  href="/#matches"
+                >
+                  Veranstaltungen
+                </Link>
               </li>
 
               <li className="nav-item">
-                {pathname === "/" ? (
-                  <AnchorLink
-                    onClick={toggleNavbar}
-                    offset={() => -1}
-                    className="nav-link"
-                    href="#shop"
-                  >
-                    Über uns
-                  </AnchorLink>
-                ) : (
-                  <Link
-                    onClick={toggleNavbar}
-                    className="nav-link"
-                    href="/#shop"
-                  >
-                    Über uns
-                  </Link>
-                )}
+                <Link
+                  onClick={(event) => handleSectionClick(event, "shop")}
+                  className="nav-link"
+                  href="/#shop"
+                >
+                  Über uns
+                </Link>
               </li>
 
               <li className="nav-item">
-                {pathname === "/" ? (
-                  <AnchorLink
-                    onClick={toggleNavbar}
-                    offset={() => -1}
-                    className="nav-link"
-                    href="#partners"
-                  >
-                    Partner
-                  </AnchorLink>
-                ) : (
-                  <Link
-                    onClick={toggleNavbar}
-                    className="nav-link"
-                    href="/#partners"
-                  >
-                    Partner
-                  </Link>
-                )}
+                <Link
+                  onClick={(event) => handleSectionClick(event, "partners")}
+                  className="nav-link"
+                  href="/#partners"
+                >
+                  Partner
+                </Link>
               </li>
 
               <li className="nav-item">
-                {pathname === "/" ? (
-                  <AnchorLink
-                    onClick={toggleNavbar}
-                    offset={() => -1}
-                    className="nav-link"
-                    href="#news"
-                  >
-                    News
-                  </AnchorLink>
-                ) : (
-                  <Link
-                    onClick={toggleNavbar}
-                    className="nav-link"
-                    href="/#news"
-                  >
-                    News
-                  </Link>
-                )}
+                <Link
+                  onClick={(event) => handleSectionClick(event, "news")}
+                  className="nav-link"
+                  href="/#news"
+                >
+                  News
+                </Link>
               </li>
             </ul>
           </div>
