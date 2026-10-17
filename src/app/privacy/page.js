@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Datenschutzerklärung - PotsRun",
   description: "Informationen zum Datenschutz bei PotsRun.",
@@ -14,9 +16,9 @@ export default async function Page() {
         }}
       >
         <div className="back-home">
-          <a href="/">
+          <Link href="/">
             <i className="bx bxs-left-arrow-alt"></i> Back Home
-          </a>
+          </Link>
         </div>
       </div>
 
