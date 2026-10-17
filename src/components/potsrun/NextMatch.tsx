@@ -9,75 +9,12 @@ import {
   allClubEventLocationsQuery,
   nextClubEventQuery,
 } from "../../sanity/lib/queries";
+import {
+  findLocationByRotationIndex,
+  getRotationIndex,
+} from "./nextMatchRotation";
 
 const BERLIN_TIMEZONE = "Europe/Berlin";
-
-// Explicit rotation order - this defines the 4-week cycle
-// The order in this array determines the rotation sequence
-// Index 0 = week 12, 16, 20... (BioCompany)
-// Index 1 = week 13, 17, 21... (Meilenweit)
-// Index 2 = week 14, 18, 22... (Weberplatz)
-// Index 3 = week 15, 19, 23... (Dampfmaschinenhaus)
-const ROTATION_ORDER = [
-  "BioCompany",
-  "Meilenweit",
-  "Weberplatz",
-  "Dampfmaschinenhaus",
-];
-
-// Base week that starts the rotation (CW12 should be index 0)
-const ROTATION_BASE_WEEK = 12;
-
-// Normalize location name for comparison
-function normalizeLocationName(name: string | undefined): string {
-  if (!name) return "";
-  return name
-    .toLowerCase()
-    .replace(/\s+/g, "")
-    .replace(/[^a-z0-9]/g, "");
-}
-
-// Get rotation index (0-3) for a given ISO week number
-function getRotationIndex(weekNumber: number, year?: number): number {
-  const baseYear = 2025;
-  const baseWeek = ROTATION_BASE_WEEK;
-
-  let weeksDiff = 0;
-  if (year !== undefined && year !== baseYear) {
-    const yearsDiff = year - baseYear;
-    weeksDiff += yearsDiff * 52;
-  }
-  weeksDiff += weekNumber - baseWeek;
-
-  const offset = ((weeksDiff % 4) + 4) % 4;
-  return offset;
-}
-
-// Match location name against rotation order
-function findLocationByRotationIndex(locations: any[], rotationIndex: number): any {
-  const expectedName = ROTATION_ORDER[rotationIndex];
-  const normalizedExpected = normalizeLocationName(expectedName);
-
-  let match = locations.find((loc) => loc.place === expectedName);
-
-  if (!match) {
-    match = locations.find(
-      (loc) => normalizeLocationName(loc.place) === normalizedExpected
-    );
-  }
-
-  if (!match) {
-    match = locations.find((loc) => {
-      const normalizedLoc = normalizeLocationName(loc.place);
-      return (
-        normalizedLoc.includes(normalizedExpected) ||
-        normalizedExpected.includes(normalizedLoc)
-      );
-    });
-  }
-
-  return match ?? locations[rotationIndex] ?? null;
-}
 
 // Get next Thursday at 19:00 Berlin time
 function getNextThursdayBerlin(): moment.Moment {
