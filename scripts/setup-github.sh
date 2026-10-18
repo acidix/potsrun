@@ -15,6 +15,13 @@
 #
 # Environment:
 #   REQUIRE_CODE_OWNER_REVIEWS=true      # require a CODEOWNERS approval (default: false)
+#   APPROVALS=1                          # required approving reviews (default: 1)
+#   ENFORCE_ADMINS=true                  # apply rules to admins too (default: true)
+#
+# Solo-maintainer note: with a single human on the repo, `APPROVALS` must be 0,
+# otherwise nobody can approve your own PRs (GitHub forbids self-approval) and
+# `ENFORCE_ADMINS=true` also blocks direct pushes. Status checks, linear
+# history, and conversation resolution still apply.
 #
 # Note on Dependabot auto-merge: `.github/workflows/dependabot-auto-merge.yml`
 # approves Dependabot PRs with the Actions bot and enables auto-merge. That only
@@ -31,6 +38,12 @@ REPO="${REPO:-acidix/potsrun}"
 BRANCH="${BRANCH:-main}"
 DRY_RUN="${1:-}"
 REQUIRE_CODE_OWNER_REVIEWS="${REQUIRE_CODE_OWNER_REVIEWS:-false}"
+APPROVALS="${APPROVALS:-1}"
+ENFORCE_ADMINS="${ENFORCE_ADMINS:-true}"
+
+# "Last push approval" only applies when at least one approval is required.
+LAST_PUSH_APPROVAL="true"
+[[ "${APPROVALS}" == "0" ]] && LAST_PUSH_APPROVAL="false"
 
 # Status check names must match the job names shown in the Actions UI.
 CI_CHECK="Lint, typecheck & build"
@@ -58,12 +71,12 @@ read -r -d '' BRANCH_PROTECTION <<JSON || true
     "strict": true,
     "contexts": ["${CI_CHECK}", "${CODEQL_CHECK}"]
   },
-  "enforce_admins": true,
+  "enforce_admins": ${ENFORCE_ADMINS},
   "required_pull_request_reviews": {
     "dismiss_stale_reviews": true,
     "require_code_owner_reviews": ${REQUIRE_CODE_OWNER_REVIEWS},
-    "required_approving_review_count": 1,
-    "require_last_push_approval": true
+    "required_approving_review_count": ${APPROVALS},
+    "require_last_push_approval": ${LAST_PUSH_APPROVAL}
   },
   "restrictions": null,
   "required_linear_history": true,
