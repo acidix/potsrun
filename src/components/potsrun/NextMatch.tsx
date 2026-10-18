@@ -28,6 +28,28 @@ function getNextThursdayBerlin(): moment.Moment {
   return nextThursday;
 }
 
+// Format the remaining time until `targetDate` as padded countdown parts.
+function getCountdown(targetDate: string | undefined, nowMs: number) {
+  const timeLeft = targetDate
+    ? moment(targetDate).diff(moment(nowMs), "seconds")
+    : 0;
+
+  if (!targetDate || timeLeft <= 0) {
+    return { days: "0", hours: "00", minutes: "00", seconds: "00" };
+  }
+
+  return {
+    days: String(Math.floor(timeLeft / 86400)),
+    hours: Math.floor((timeLeft % 86400) / 3600)
+      .toString()
+      .padStart(2, "0"),
+    minutes: Math.floor((timeLeft % 3600) / 60)
+      .toString()
+      .padStart(2, "0"),
+    seconds: (timeLeft % 60).toString().padStart(2, "0"),
+  };
+}
+
 export default function NextMatch() {
   const [nextEvent, setNextEvent] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
@@ -123,51 +145,20 @@ export default function NextMatch() {
     fetchNextEvent();
   }, []);
 
-  const [days, setDays] = React.useState("");
-  const [hours, setHours] = React.useState("");
-  const [minutes, setMinutes] = React.useState("");
-  const [seconds, setSeconds] = React.useState("");
-
-  const commingSoonTime = React.useCallback(() => {
-    if (!nextEvent?.date) {
-      setDays("0");
-      setHours("00");
-      setMinutes("00");
-      setSeconds("00");
-      return;
-    }
-
-    const endTime = moment(nextEvent.date);
-    const now = moment();
-    const timeLeft = endTime.diff(now, "seconds");
-
-    if (timeLeft <= 0) {
-      setDays("0");
-      setHours("00");
-      setMinutes("00");
-      setSeconds("00");
-      return;
-    }
-
-    const calculatedDays = Math.floor(timeLeft / 86400);
-    const calculatedHours = Math.floor((timeLeft % 86400) / 3600);
-    const calculatedMinutes = Math.floor((timeLeft % 3600) / 60);
-    const calculatedSeconds = timeLeft % 60;
-
-    setDays(String(calculatedDays));
-    setHours(calculatedHours.toString().padStart(2, "0"));
-    setMinutes(calculatedMinutes.toString().padStart(2, "0"));
-    setSeconds(calculatedSeconds.toString().padStart(2, "0"));
-  }, [nextEvent]);
+  const [now, setNow] = React.useState(() => Date.now());
 
   React.useEffect(() => {
-    commingSoonTime();
     const interval = setInterval(() => {
-      commingSoonTime();
+      setNow(Date.now());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [commingSoonTime]);
+  }, []);
+
+  const { days, hours, minutes, seconds } = getCountdown(
+    nextEvent?.date,
+    now,
+  );
 
   if (loading) {
     return (
