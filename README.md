@@ -121,6 +121,10 @@ Status is reported by the badges above: **Vercel** reflects the production
 deployment health, **CI** verifies lint, typecheck, tests and build, and
 **CodeQL** runs security analysis on every change to `main`.
 
+Dependabot keeps dependencies current and **auto-merges minor and patch
+updates** once checks pass; major updates are left for manual review (see
+[`.github/workflows/dependabot-auto-merge.yml`](./.github/workflows/dependabot-auto-merge.yml)).
+
 ## Contributing
 
 We welcome contributions. Please read **[CONTRIBUTING.md](./CONTRIBUTING.md)**

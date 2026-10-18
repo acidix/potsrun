@@ -103,6 +103,9 @@ The exact protection settings are applied by `scripts/setup-github.sh`.
   `main`, and a weekly schedule.
 - `.github/workflows/dependency-review.yml`: blocks PRs introducing
   high-severity vulnerable dependencies.
+- `.github/workflows/dependabot-auto-merge.yml`: approves and enables
+  auto-merge (squash) for Dependabot PRs whose `update-type` is `semver-minor`
+  or `semver-patch`; major updates are left for manual review.
 - `.github/dependabot.yml`: weekly grouped npm + GitHub Actions updates.
 - Never commit env files. No `.env` is tracked; `.env.local` is git-ignored.
   The required values are public `NEXT_PUBLIC_*` and are supplied via GitHub
