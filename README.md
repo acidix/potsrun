@@ -88,6 +88,11 @@ cp .env.example .env.local
 For CI, set them as **GitHub Actions repository secrets**; for the live site,
 set them in the **Vercel project settings** (see [Deployment](#deployment)).
 
+> **Dependabot PRs:** GitHub does not expose Actions secrets to
+> Dependabot-triggered workflows, so the same values must **also** be added
+> under **Settings → Secrets and variables → Dependabot** (identical names).
+> Without this, CI fails on Dependabot pull requests.
+
 ## Available scripts
 
 | Command             | Description                                        |

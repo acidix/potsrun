@@ -117,8 +117,10 @@ Populate `.env.local` (copy from `.env.example`) with:
 - `NEXT_PUBLIC_SANITY_API_VERSION` (optional, defaults to `2024-09-04`)
 
 CI reads the first two from repository secrets (`NEXT_PUBLIC_SANITY_PROJECT_ID`,
-`NEXT_PUBLIC_SANITY_DATASET`) and defaults the API version. The Vercel project
-must define the same variables for Production, Preview and Development.
+`NEXT_PUBLIC_SANITY_DATASET`) and defaults the API version. The same values must
+also be stored as **Dependabot secrets** (identical names), because Dependabot
+workflows cannot read Actions secrets. The Vercel project must define the same
+variables for Production, Preview and Development.
 
 Never commit secrets; share via secure channels. When adding schemas, register
 them in `src/sanity/schemaTypes/index.ts` and validate the structure with
