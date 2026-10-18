@@ -86,7 +86,9 @@ Jest + Testing Library with `next/jest` (`jest.config.js`, jsdom environment,
   [Conventional Commits](https://www.conventionalcommits.org/) (e.g.
   `fix: correct countdown timezone`). Document cross-cutting changes in the body.
 - Required to merge:
-  - 1 approving review, including a **CODEOWNER** (`.github/CODEOWNERS`).
+  - 1 approving review (reviewers are requested via `.github/CODEOWNERS`; set
+    `REQUIRE_CODE_OWNER_REVIEWS=true` when running the setup script to require a
+    _code-owner_ approval instead).
   - Passing status checks: **CI** (lint, typecheck, test, build) and **CodeQL**.
   - Resolved conversations and an up-to-date branch.
   - Stale approvals dismissed on new pushes; linear history enforced.
@@ -103,6 +105,12 @@ The exact protection settings are applied by `scripts/setup-github.sh`.
   `main`, and a weekly schedule.
 - `.github/workflows/dependency-review.yml`: blocks PRs introducing
   high-severity vulnerable dependencies.
+- `.github/workflows/dependabot-auto-merge.yml`: approves and enables
+  auto-merge (squash) for Dependabot PRs whose `update-type` is `semver-minor`
+  or `semver-patch`; major updates are left for manual review. Requires the repo
+  setting _Allow GitHub Actions to create and approve pull requests_ (set by
+  `scripts/setup-github.sh`); with `REQUIRE_CODE_OWNER_REVIEWS=true` the bot's
+  approval does not count as a code-owner review, so it stalls.
 - `.github/dependabot.yml`: weekly grouped npm + GitHub Actions updates.
 - Never commit env files. No `.env` is tracked; `.env.local` is git-ignored.
   The required values are public `NEXT_PUBLIC_*` and are supplied via GitHub
@@ -117,8 +125,10 @@ Populate `.env.local` (copy from `.env.example`) with:
 - `NEXT_PUBLIC_SANITY_API_VERSION` (optional, defaults to `2024-09-04`)
 
 CI reads the first two from repository secrets (`NEXT_PUBLIC_SANITY_PROJECT_ID`,
-`NEXT_PUBLIC_SANITY_DATASET`) and defaults the API version. The Vercel project
-must define the same variables for Production, Preview and Development.
+`NEXT_PUBLIC_SANITY_DATASET`) and defaults the API version. The same values must
+also be stored as **Dependabot secrets** (identical names), because Dependabot
+workflows cannot read Actions secrets. The Vercel project must define the same
+variables for Production, Preview and Development.
 
 Never commit secrets; share via secure channels. When adding schemas, register
 them in `src/sanity/schemaTypes/index.ts` and validate the structure with
