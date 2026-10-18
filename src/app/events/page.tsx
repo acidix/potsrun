@@ -1,5 +1,6 @@
 import { sanityFetch } from "../../sanity/lib/client";
 import { allEventsQuery } from "../../sanity/lib/queries";
+import Link from "next/link";
 
 export const metadata = {
   title: "Veranstaltungen - PotsRun",
@@ -99,9 +100,9 @@ export default async function EventsPage() {
         }}
       >
         <div className="back-home">
-          <a href="/">
+          <Link href="/">
             <i className="bx bxs-left-arrow-alt"></i> Zurück
-          </a>
+          </Link>
         </div>
       </div>
 

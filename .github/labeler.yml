@@ -1,0 +1,41 @@
+# Configuration for actions/labeler (v5+).
+# Adds labels to PRs based on changed file paths.
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "LICENSE"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "package-lock.json"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+
+sanity:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/sanity/**"
+          - "sanity.config.ts"
+          - "sanity.cli.ts"
+
+components:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/components/**"
+
+app:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/app/**"
+
+styles:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "styles/**"

@@ -35,7 +35,7 @@ export function urlFor(source) {
   return builder.image(source)
 }
 
-export function blocksToText(blocks, preview_length) {
+export function blocksToText(blocks, preview_length?: number) {
   const resp = blocks
     .map(block => block.children?.map(child => child.text).join(''))
 

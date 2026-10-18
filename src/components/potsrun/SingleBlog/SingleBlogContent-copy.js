@@ -21,9 +21,9 @@ const SingleBlogContent = (Props) => {
         }}
       >
         <div className="back-home">
-          <a href="/">
+          <Link href="/">
             <i className="bx bxs-left-arrow-alt"></i> Back Home
-          </a>
+          </Link>
         </div>
       </div>
 
