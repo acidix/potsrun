@@ -28,6 +28,28 @@ function getNextThursdayBerlin(): moment.Moment {
   return nextThursday;
 }
 
+// Format the remaining time until `targetDate` as padded countdown parts.
+function getCountdown(targetDate: string | undefined, nowMs: number) {
+  const timeLeft = targetDate
+    ? moment(targetDate).diff(moment(nowMs), "seconds")
+    : 0;
+
+  if (!targetDate || timeLeft <= 0) {
+    return { days: "0", hours: "00", minutes: "00", seconds: "00" };
+  }
+
+  return {
+    days: String(Math.floor(timeLeft / 86400)),
+    hours: Math.floor((timeLeft % 86400) / 3600)
+      .toString()
+      .padStart(2, "0"),
+    minutes: Math.floor((timeLeft % 3600) / 60)
+      .toString()
+      .padStart(2, "0"),
+    seconds: (timeLeft % 60).toString().padStart(2, "0"),
+  };
+}
+
 // Number of upcoming runs shown in the location strip
 const STRIP_RUN_COUNT = 4;
 
