@@ -44,5 +44,8 @@
     "eslint-config-next": "^16.4.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
+  },
+  "overrides": {
+    "adm-zip": "^0.6.1"
   }
 }
