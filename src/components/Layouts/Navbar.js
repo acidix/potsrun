@@ -73,9 +73,10 @@ const Navbar = () => {
   const classOne = collapsed
     ? "collapse navbar-collapse"
     : "navbar-collapse collapse show";
-  const classTwo = collapsed
-    ? "navbar-toggler navbar-toggler-right collapsed"
-    : "navbar-toggler navbar-toggler-right";
+  const togglerClass = collapsed
+    ? "navbar-toggler collapsed"
+    : "navbar-toggler";
+  const burgerClass = collapsed ? "burger-menu" : "burger-menu active";
 
   return (
     <>
@@ -86,15 +87,17 @@ const Navbar = () => {
         <div className="container-fluid">
           <button
             onClick={toggleNavbar}
-            className={classTwo}
+            className={togglerClass}
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? "Menü öffnen" : "Menü schließen"}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className={burgerClass} aria-hidden="true">
+              <span className="top-bar" />
+              <span className="middle-bar" />
+              <span className="bottom-bar" />
+            </span>
           </button>
 
           <Link href="/" className="navbar-brand">
