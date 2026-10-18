@@ -20,5 +20,10 @@
 # Content model and data access layer.
 /src/sanity/ @acidix
 
+# Dependency automation: these files decide which Dependency updates merge
+# without a human, so keep them under maintainer (code owner) review.
+/.github/workflows/dependabot-auto-merge.yml @acidix
+/.github/dependabot.yml @acidix
+
 # Security policy itself.
 /SECURITY.md @acidix

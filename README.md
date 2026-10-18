@@ -88,6 +88,11 @@ cp .env.example .env.local
 For CI, set them as **GitHub Actions repository secrets**; for the live site,
 set them in the **Vercel project settings** (see [Deployment](#deployment)).
 
+> **Dependabot PRs:** GitHub does not expose Actions secrets to
+> Dependabot-triggered workflows, so the same values must **also** be added
+> under **Settings → Secrets and variables → Dependabot** (identical names).
+> Without this, CI fails on Dependabot pull requests.
+
 ## Available scripts
 
 | Command             | Description                                        |
@@ -116,6 +121,12 @@ Status is reported by the badges above: **Vercel** reflects the production
 deployment health, **CI** verifies lint, typecheck, tests and build, and
 **CodeQL** runs security analysis on every change to `main`.
 
+Dependabot keeps dependencies current and **auto-merges minor and patch
+updates** once checks pass; major updates are left for manual review (see
+[`.github/workflows/dependabot-auto-merge.yml`](./.github/workflows/dependabot-auto-merge.yml)).
+This relies on the repo setting _Allow GitHub Actions to create and approve pull
+requests_, which `scripts/setup-github.sh` enables.
+
 ## Contributing
 
 We welcome contributions. Please read **[CONTRIBUTING.md](./CONTRIBUTING.md)**
@@ -123,8 +134,9 @@ for setup, the GitHub flow we follow, coding standards, and how PRs are
 reviewed. By participating you agree to the
 [Code of Conduct](./CODE_OF_CONDUCT.md).
 
-- `main` is protected: changes land via PR with a **CODEOWNER** review and
-  passing status checks (required contexts: **CI**, **CodeQL**).
+- `main` is protected: changes land via PR with an approving review and passing
+  status checks (required contexts: **CI**, **CodeQL**). Reviewers are requested
+  from [`.github/CODEOWNERS`](./.github/CODEOWNERS).
 - Use the issue templates for [bugs](https://github.com/acidix/potsrun/issues/new?template=bug_report.yml)
   and [features](https://github.com/acidix/potsrun/issues/new?template=feature_request.yml).
 - AI/automation agents should follow [AGENTS.md](./AGENTS.md).
