@@ -86,7 +86,9 @@ Jest + Testing Library with `next/jest` (`jest.config.js`, jsdom environment,
   [Conventional Commits](https://www.conventionalcommits.org/) (e.g.
   `fix: correct countdown timezone`). Document cross-cutting changes in the body.
 - Required to merge:
-  - 1 approving review, including a **CODEOWNER** (`.github/CODEOWNERS`).
+  - 1 approving review (reviewers are requested via `.github/CODEOWNERS`; set
+    `REQUIRE_CODE_OWNER_REVIEWS=true` when running the setup script to require a
+    _code-owner_ approval instead).
   - Passing status checks: **CI** (lint, typecheck, test, build) and **CodeQL**.
   - Resolved conversations and an up-to-date branch.
   - Stale approvals dismissed on new pushes; linear history enforced.
@@ -105,7 +107,10 @@ The exact protection settings are applied by `scripts/setup-github.sh`.
   high-severity vulnerable dependencies.
 - `.github/workflows/dependabot-auto-merge.yml`: approves and enables
   auto-merge (squash) for Dependabot PRs whose `update-type` is `semver-minor`
-  or `semver-patch`; major updates are left for manual review.
+  or `semver-patch`; major updates are left for manual review. Requires the repo
+  setting _Allow GitHub Actions to create and approve pull requests_ (set by
+  `scripts/setup-github.sh`); with `REQUIRE_CODE_OWNER_REVIEWS=true` the bot's
+  approval does not count as a code-owner review, so it stalls.
 - `.github/dependabot.yml`: weekly grouped npm + GitHub Actions updates.
 - Never commit env files. No `.env` is tracked; `.env.local` is git-ignored.
   The required values are public `NEXT_PUBLIC_*` and are supplied via GitHub
