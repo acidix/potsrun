@@ -50,8 +50,17 @@ function getCountdown(targetDate: string | undefined, nowMs: number) {
   };
 }
 
+// Number of upcoming runs shown in the location strip
+const STRIP_RUN_COUNT = 4;
+
+type StripRun = {
+  date: string;
+  place: string;
+};
+
 export default function NextMatch() {
   const [nextEvent, setNextEvent] = React.useState<any>(null);
+  const [stripRuns, setStripRuns] = React.useState<StripRun[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -78,6 +87,22 @@ export default function NextMatch() {
           const rotationIndex = getRotationIndex(wn, yr);
           return findLocationByRotationIndex(locations, rotationIndex);
         };
+
+        // The strip follows the fixed rotation, starting with the run shown
+        // above (one week later if the next event is marked as skipped)
+        const stripStart =
+          upcomingEvents?.[0]?.skipEvent === true
+            ? nextThursday.clone().add(7, "days")
+            : nextThursday;
+        setStripRuns(
+          Array.from({ length: STRIP_RUN_COUNT }, (_, i) => {
+            const thursday = stripStart.clone().add(i * 7, "days");
+            const location = getFallbackForThursday(thursday);
+            return location
+              ? { date: thursday.toISOString(), place: location.place }
+              : null;
+          }).filter((run): run is StripRun => run !== null)
+        );
 
         if (upcomingEvents && upcomingEvents.length > 0) {
           const firstEvent = upcomingEvents[0];
@@ -196,6 +221,11 @@ export default function NextMatch() {
     );
   }
 
+  const longestStripPlace = stripRuns.reduce(
+    (longest, run) => (run.place.length > longest.length ? run.place : longest),
+    ""
+  );
+
   return (
     <>
       <section className="next-match-area">
@@ -312,6 +342,37 @@ export default function NextMatch() {
           </div>
         </div>
       </section>
+
+      {stripRuns.length > 0 && (
+        <section className="next-locations-strip">
+          <div className="container-fluid">
+            <div className="row">
+              {stripRuns.map((run, index) => (
+                <div className="col-6 col-lg-3" key={run.date}>
+                  <div
+                    className={`next-locations-item${index === 0 ? " is-current" : ""}`}
+                  >
+                    <div className="text">
+                      <span className="date">
+                        {moment(run.date)
+                          .tz(BERLIN_TIMEZONE)
+                          .format("DD.MM.YYYY")}
+                      </span>
+                      <h3>{run.place}</h3>
+                      {/* Invisible copy of the longest name: gives every cell
+                          the same text width, so all texts share one left edge
+                          and the longest name appears centered */}
+                      <h3 className="sizer" aria-hidden="true">
+                        {longestStripPlace}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

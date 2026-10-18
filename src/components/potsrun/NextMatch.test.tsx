@@ -74,10 +74,10 @@ describe("NextMatch", () => {
       await screen.findByText("Nächster Donnerstagslauf")
     ).toBeInTheDocument();
     expect(
-      screen.getByText(
+      screen.getAllByText(
         /BioCompany|Meilenweit|Weberplatz|Dampfmaschinenhaus/
-      )
-    ).toBeInTheDocument();
+      ).length
+    ).toBeGreaterThan(0);
   });
 
   it("announces that no date is known when data is empty", async () => {
