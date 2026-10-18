@@ -114,8 +114,8 @@ gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   "repos/${REPO}/actions/permissions/workflow" \
-  -f "default_workflow_permissions=read" \
-  -f "can_approve_pull_request_reviews=true"
+  -F "default_workflow_permissions=read" \
+  -F "can_approve_pull_request_reviews=true"
 
 echo "==> Enabling Dependabot alerts and security updates"
 gh api --method PUT "repos/${REPO}/vulnerability-alerts"
