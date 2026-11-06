@@ -17,7 +17,7 @@ const Partners = () => {
           </div>
 
           <div className="row justify-content-center align-items-center">
-            <div className="col-lg-4 col-sm-6 col-md-6 col-8">
+            <div className="col-lg-3 col-sm-6 col-md-6 col-8">
               <div className="single-partners-box">
                 <Link
                   href="https://www.meilenweit-potsdam.de/"
@@ -134,6 +134,23 @@ const Partners = () => {
                     alt="image"
                     width={185}
                     height={60}
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div className="col-lg-3 col-sm-4 col-md-4 col-6">
+              <div className="single-partners-box">
+                <Link
+                  href="https://www.laufenimdahmespreewald.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/potsrun/partner/LaufenDahmeSpreewald.png"
+                    alt="image"
+                    width={140}
+                    height={100}
                   />
                 </Link>
               </div>
