@@ -24,7 +24,7 @@
     "fslightbox-react": "^1.7.6",
     "moment": "^2.31.0",
     "moment-timezone": "^0.6.6",
-    "next": "^16.4.3",
+    "next": "^16.4.5",
     "next-sanity": "^12.2.1",
     "react": "^19.3.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",
@@ -41,7 +41,7 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.3.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.4.3",
+    "eslint-config-next": "^16.4.5",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
   },
